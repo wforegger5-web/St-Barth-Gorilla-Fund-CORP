@@ -8,6 +8,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<!--
+  PayPal JS SDK — Smart Payment Buttons
+  ---------------------------------------------------------------
+  client-id=test below is PayPal's public SANDBOX/DEMO id. Buttons
+  will render with it, but real money will NOT move until you swap
+  it for your own live Client ID from developer.paypal.com
+  (Apps & Credentials → your app → Client ID, "Live" tab, not "Sandbox").
+  Everything else (currency, funding sources) can stay as-is.
+-->
+<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD&components=buttons&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
 <style>
   :root{
     --black:#0b0c0a;
@@ -182,25 +192,58 @@
   .partner-card .link a{color:var(--gold-light); border-bottom:1px solid transparent;}
   .partner-card .link a:hover{border-color:var(--gold-light);}
 
-  /* ---------- FIELD LEDGER (signature element) ---------- */
-  .ledger{
+  /* ---------- REGISTRY / CHECKLIST (signature element) ---------- */
+  .registry{
     background:var(--charcoal); border:1px solid var(--line); margin-top:90px;
   }
-  .ledger-head{
-    display:flex; justify-content:space-between; align-items:flex-end; padding:36px 40px 24px;
+  .registry-head{
+    display:flex; justify-content:space-between; align-items:flex-end; padding:36px 40px 28px;
     border-bottom:1px solid var(--line); flex-wrap:wrap; gap:16px;
   }
-  .ledger-head h3{font-size:24px; font-weight:500;}
-  .ledger-head p{font-size:13px; max-width:380px;}
-  .ledger-rows{padding:8px 40px 32px;}
-  .ledger-row{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:18px 0; border-bottom:1px solid var(--line); gap:20px;
+  .registry-head h3{font-size:24px; font-weight:500;}
+  .registry-head p{font-size:13px; max-width:380px;}
+  .registry-group{border-bottom:1px solid var(--line);}
+  .registry-group:last-of-type{border-bottom:none;}
+  .registry-group summary{
+    list-style:none; cursor:pointer; padding:24px 40px; display:flex; align-items:center;
+    justify-content:space-between; gap:16px;
   }
-  .ledger-row:last-child{border-bottom:none;}
-  .ledger-row .li-name{font-family:var(--serif); font-size:19px; color:var(--ivory);}
-  .ledger-row .li-org{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory-dim); margin-top:4px;}
-  .ledger-row .li-amt{font-family:var(--serif); font-size:19px; color:var(--gold-light); white-space:nowrap;}
+  .registry-group summary::-webkit-details-marker{display:none;}
+  .registry-group summary .g-title{font-family:var(--serif); font-size:20px; color:var(--ivory);}
+  .registry-group summary .g-sub{font-size:10.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-top:5px;}
+  .registry-group summary .g-chevron{
+    font-family:var(--sans); font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory-dim);
+    border:1px solid var(--line-strong); padding:8px 14px; transition:all .2s;
+  }
+  .registry-group[open] summary .g-chevron{color:var(--gold-light); border-color:var(--gold);}
+  .registry-items{padding:0 40px 28px;}
+  .reg-row{
+    display:flex; align-items:flex-start; gap:16px; padding:14px 0; border-top:1px solid var(--line);
+  }
+  .reg-row input[type=checkbox]{
+    appearance:none; -webkit-appearance:none; width:19px; height:19px; margin-top:2px; flex-shrink:0;
+    border:1px solid var(--line-strong); background:transparent; cursor:pointer; position:relative; transition:all .2s;
+  }
+  .reg-row input[type=checkbox]:checked{background:var(--gold); border-color:var(--gold);}
+  .reg-row input[type=checkbox]:checked::after{
+    content:"✓"; position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-size:12px; color:var(--black); font-family:var(--sans); font-weight:600;
+  }
+  .reg-row label{flex-grow:1; cursor:pointer; display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap;}
+  .reg-row .ri-name{font-family:var(--serif); font-size:17px; color:var(--ivory);}
+  .reg-row .ri-amt{font-family:var(--serif); font-size:17px; color:var(--gold-light); white-space:nowrap;}
+  .reg-row .ri-custom{
+    width:90px; background:transparent; border:none; border-bottom:1px solid var(--line-strong);
+    color:var(--gold-light); font-family:var(--serif); font-size:16px; text-align:right; padding:2px 0; outline:none;
+  }
+  .reg-row.disabled label{opacity:0.55;}
+
+  .registry-bar{
+    position:sticky; bottom:0; display:flex; align-items:center; justify-content:space-between;
+    padding:22px 40px; background:var(--black); border-top:1px solid var(--line-strong); flex-wrap:wrap; gap:16px;
+  }
+  .registry-bar .rb-count{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory-dim);}
+  .registry-bar .rb-total{font-family:var(--serif); font-size:28px; color:var(--gold-light); margin-top:4px;}
 
   /* ---------- GET INVOLVED ---------- */
   .involved-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:1px; background:var(--line); border:1px solid var(--line);}
@@ -316,8 +359,10 @@
     <div class="navlinks" id="navLinks">
       <a href="#mission">Our Purpose</a>
       <a href="#partners">Field Partners</a>
+      <a href="#field-needs">The Registry</a>
       <a href="#involved">Get Involved</a>
       <a href="#contact">Contact</a>
+      <a href="https://www.stbarthgorillaexpeditions.com/" target="_blank" rel="noopener">Our Safaris ↗</a>
       <a href="#donate" class="btn">Give Now</a>
     </div>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -475,39 +520,91 @@
 
 <section id="field-needs">
   <div class="wrap">
-    <div class="ledger reveal">
-      <div class="ledger-head">
+    <div class="section-head reveal">
+      <span class="eyebrow">The Registry</span>
+      <h2>Buy something specific</h2>
+      <p style="margin-top:14px; font-size:16px;">Check off exactly what you'd like to fund — a truck of sand for a dormitory foundation, a term of school fees, a season of meals. Your total updates as you go, and your gift is itemized when you check out.</p>
+      <p style="margin-top:10px; font-size:12.5px; color:var(--ivory-dim);">Frankfurt Zoological Society amounts are converted from EUR at an approximate rate of €1 = $1.15 and will vary slightly with the exchange rate at the time of your gift.</p>
+    </div>
+
+    <div class="registry reveal">
+
+      <details class="registry-group" open>
+        <summary>
+          <div><div class="g-title">Gifted Child Foundation Primary School</div><div class="g-sub">Uganda — Education</div></div>
+          <span class="g-chevron">Show Items</span>
+        </summary>
+        <div class="registry-items">
+          <div class="reg-row"><input type="checkbox" id="i1" data-name="1 Month Staff Salaries (16 staff)" data-amt="2200"><label for="i1"><span class="ri-name">1 Month Staff Salaries (16 staff)</span><span class="ri-amt">$2,200</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i2" data-name="1 Month Lunch &amp; Dinner (120 pupils)" data-amt="2000"><label for="i2"><span class="ri-name">1 Month Lunch &amp; Dinner (120 pupils)</span><span class="ri-amt">$2,000</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i3" data-name="1 Month Breakfast (120 pupils)" data-amt="600"><label for="i3"><span class="ri-name">1 Month Breakfast (120 pupils)</span><span class="ri-amt">$600</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i4" data-name="Completing 2 Classrooms" data-amt="8500"><label for="i4"><span class="ri-name">Completing 2 Classrooms</span><span class="ri-amt">$8,500</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i5" data-name="Boys' Dormitory Construction" data-amt="23000"><label for="i5"><span class="ri-name">Boys' Dormitory Construction</span><span class="ri-amt">$23,000</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i6" data-name="20KW 3-Phase Solar Power System" data-amt="3000"><label for="i6"><span class="ri-name">20KW 3-Phase Solar Power System</span><span class="ri-amt">$3,000</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i7" data-name="School Van" data-amt="20000"><label for="i7"><span class="ri-name">School Van</span><span class="ri-amt">$20,000</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i8" data-name="Text Books" data-amt="600"><label for="i8"><span class="ri-name">Text Books</span><span class="ri-amt">$600</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i9" data-name="5-Stance Latrine Construction" data-amt="5700"><label for="i9"><span class="ri-name">5-Stance Latrine Construction</span><span class="ri-amt">$5,700</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i10" data-name="School Shoes (120 pupils)" data-amt="1700"><label for="i10"><span class="ri-name">School Shoes (120 pupils)</span><span class="ri-amt">$1,700</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i11" data-name="School Sweaters (120 pupils)" data-amt="1700"><label for="i11"><span class="ri-name">School Sweaters (120 pupils)</span><span class="ri-amt">$1,700</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i12" data-name="School Uniforms (120 pupils)" data-amt="1370"><label for="i12"><span class="ri-name">School Uniforms (120 pupils)</span><span class="ri-amt">$1,370</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i13" data-name="Perimeter Wall Construction" data-amt="10000"><label for="i13"><span class="ri-name">Perimeter Wall Construction</span><span class="ri-amt">$10,000</span></label></div>
+        </div>
+      </details>
+
+      <details class="registry-group">
+        <summary>
+          <div><div class="g-title">Rushaga Community Primary School — Dormitory Foundation</div><div class="g-sub">Uganda — Education</div></div>
+          <span class="g-chevron">Show Items</span>
+        </summary>
+        <div class="registry-items">
+          <div class="reg-row"><input type="checkbox" id="i14" data-name="1 Truck of Stones" data-amt="39"><label for="i14"><span class="ri-name">1 Truck of Stones</span><span class="ri-amt">$39</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i15" data-name="1 Truck of Sand" data-amt="37"><label for="i15"><span class="ri-name">1 Truck of Sand</span><span class="ri-amt">$37</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i16" data-name="1 Truck of Gravel" data-amt="35"><label for="i16"><span class="ri-name">1 Truck of Gravel</span><span class="ri-amt">$35</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i17" data-name="1 Truck of Concrete" data-amt="69"><label for="i17"><span class="ri-name">1 Truck of Concrete</span><span class="ri-amt">$69</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i18" data-name="1 Piece of Steel" data-amt="10"><label for="i18"><span class="ri-name">1 Piece of Steel</span><span class="ri-amt">$10</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i19" data-name="1 Bag of Cement" data-amt="11"><label for="i19"><span class="ri-name">1 Bag of Cement</span><span class="ri-amt">$11</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i20" data-name="5kg Binding Wire" data-amt="11"><label for="i20"><span class="ri-name">5kg Binding Wire</span><span class="ri-amt">$11</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i21" data-name="50 Bricks" data-amt="50"><label for="i21"><span class="ri-name">50 Bricks</span><span class="ri-amt">$50</span></label></div>
+        </div>
+      </details>
+
+      <details class="registry-group">
+        <summary>
+          <div><div class="g-title">Frankfurt Zoological Society — Serengeti Programme</div><div class="g-sub">Tanzania — Wildlife Conservation</div></div>
+          <span class="g-chevron">Show Items</span>
+        </summary>
+        <div class="registry-items">
+          <div class="reg-row"><input type="checkbox" id="i22" data-name="Sleeping Bag for a Field Ranger" data-amt="58"><label for="i22"><span class="ri-name">Sleeping Bag for a Field Ranger Camping in the Bush</span><span class="ri-amt">~$58</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i22b" data-name="Week of Food for the De-Snaring Team" data-amt="173"><label for="i22b"><span class="ri-name">1 Week of Food for the De-Snaring Team</span><span class="ri-amt">~$173</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i22c" data-name="GPS Unit or Binoculars for a Patrol Team" data-amt="346"><label for="i22c"><span class="ri-name">GPS Unit or Binoculars for a Patrol Team</span><span class="ri-amt">~$346</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i22d" data-name="Vehicle Repair Stock for the Car Workshop" data-amt="577"><label for="i22d"><span class="ri-name">Repair Stock for the De-Snaring Team's Car Workshop</span><span class="ri-amt">~$577</span></label></div>
+          <div class="reg-row"><input type="checkbox" id="i22e" data-name="100-Hour Patrol Aircraft Service" data-amt="5770"><label for="i22e"><span class="ri-name">100-Hour Service for the FZS Patrol Aircraft</span><span class="ri-amt">~$5,770</span></label></div>
+        </div>
+      </details>
+
+      <details class="registry-group">
+        <summary>
+          <div><div class="g-title">General Support</div><div class="g-sub">All Other Field Partners — Choose Your Own Amount</div></div>
+          <span class="g-chevron">Show Items</span>
+        </summary>
+        <div class="registry-items">
+          <div class="reg-row"><input type="checkbox" id="i23" data-name="General Support — Serengeti Preservation Foundation" data-amt="0" data-custom="true"><label for="i23"><span class="ri-name">Serengeti Preservation Foundation (Tanzania)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i23" disabled></label></div>
+          <div class="reg-row"><input type="checkbox" id="i24" data-name="General Support — TAWIRI" data-amt="0" data-custom="true"><label for="i24"><span class="ri-name">TAWIRI Serengeti Wildlife Research Centre (Tanzania)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i24" disabled></label></div>
+          <div class="reg-row"><input type="checkbox" id="i25" data-name="General Support — Bright English Medium School" data-amt="0" data-custom="true"><label for="i25"><span class="ri-name">Bright English Medium School (Tanzania)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i25" disabled></label></div>
+          <div class="reg-row"><input type="checkbox" id="i26" data-name="General Support — Dian Fossey Gorilla Fund" data-amt="0" data-custom="true"><label for="i26"><span class="ri-name">Dian Fossey Gorilla Fund (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i26" disabled></label></div>
+          <div class="reg-row"><input type="checkbox" id="i27" data-name="General Support — Kinigi Women Village" data-amt="0" data-custom="true"><label for="i27"><span class="ri-name">Kinigi Women Village (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i27" disabled></label></div>
+          <div class="reg-row"><input type="checkbox" id="i28" data-name="General Support — Kwizera Charity Foundation" data-amt="0" data-custom="true"><label for="i28"><span class="ri-name">Kwizera Charity Foundation (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i28" disabled></label></div>
+          <div class="reg-row"><input type="checkbox" id="i29" data-name="General Support — Nyabihu School for the Deaf" data-amt="0" data-custom="true"><label for="i29"><span class="ri-name">Nyabihu School for the Deaf (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i29" disabled></label></div>
+          <div class="reg-row"><input type="checkbox" id="i30" data-name="General Support — Gorilla Doctors" data-amt="0" data-custom="true"><label for="i30"><span class="ri-name">Gorilla Doctors (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i30" disabled></label></div>
+        </div>
+      </details>
+
+      <div class="registry-bar">
         <div>
-          <span class="eyebrow" style="margin-bottom:8px;">Current Field Needs</span>
-          <h3>Designate your gift to a specific need</h3>
+          <div class="rb-count" id="rbCount">0 items selected</div>
+          <div class="rb-total" id="rbTotal">$0</div>
         </div>
-        <p>A sample of active, itemized requests from our field partners. Select "Other / Field Needs" in the giving form and note any of these below.</p>
-      </div>
-      <div class="ledger-rows">
-        <div class="ledger-row">
-          <div><div class="li-name">5-Stance Latrine Construction</div><div class="li-org">Gifted Child Foundation Primary School — Uganda</div></div>
-          <div class="li-amt">$5,700</div>
-        </div>
-        <div class="ledger-row">
-          <div><div class="li-name">Boys' Dormitory Construction</div><div class="li-org">Gifted Child Foundation Primary School — Uganda</div></div>
-          <div class="li-amt">$23,000</div>
-        </div>
-        <div class="ledger-row">
-          <div><div class="li-name">GPS Collar &amp; Tracking Equipment</div><div class="li-org">Frankfurt Zoological Society — Tanzania</div></div>
-          <div class="li-amt">from $300</div>
-        </div>
-        <div class="ledger-row">
-          <div><div class="li-name">Term of School Fees, Boarding Child</div><div class="li-org">Rushaga Community Primary School — Uganda</div></div>
-          <div class="li-amt">~$80</div>
-        </div>
-        <div class="ledger-row">
-          <div><div class="li-name">Hearing Aids &amp; School Supplies</div><div class="li-org">Nyabihu School for the Deaf — Rwanda</div></div>
-          <div class="li-amt">from $50</div>
-        </div>
-        <div class="ledger-row">
-          <div><div class="li-name">Vocational Training &amp; Equipment</div><div class="li-org">Kinigi Women Village — Rwanda</div></div>
-          <div class="li-amt">from $100</div>
-        </div>
+        <div id="paypal-button-registry" style="min-width:220px;"></div>
       </div>
     </div>
   </div>
@@ -594,8 +691,9 @@
           </select>
         </div>
 
-        <button class="btn solid donate-submit" id="donateBtn" type="button">Give $100 One-Time →</button>
-        <p class="donate-note">You'll be securely redirected to PayPal to complete your gift. Saint Barth Gorilla Fund is a project of Saint Barth Gorilla Expeditions' philanthropic trust.</p>
+        <div id="paypal-button-donate"></div>
+        <p class="donate-note" id="monthlyNote" style="display:none;">Monthly giving is set up individually right now — email <a href="mailto:fund@stbarthgorillafund.org" style="color:var(--gold-light);">fund@stbarthgorillafund.org</a> with your preferred amount and we'll set up recurring billing for you.</p>
+        <p class="donate-note">Secured by PayPal — pay by PayPal balance, card, or Venmo. Saint Barth Gorilla Fund is a project of Saint Barth Gorilla Expeditions' philanthropic trust.</p>
       </div>
     </div>
   </div>
@@ -611,7 +709,7 @@
     <div class="contact-links">
       <div class="item"><div class="label">Phone</div><div class="value"><a href="tel:+15082215527">+1 508 221 5527</a></div></div>
       <div class="item"><div class="label">Email</div><div class="value"><a href="mailto:fund@stbarthgorillafund.org">fund@stbarthgorillafund.org</a></div></div>
-      <div class="item"><div class="label">Based In</div><div class="value">St Barthélemy, F.W.I.</div></div>
+      <div class="item"><div class="label">Based In</div><div class="value">Wellesley, Massachusetts</div></div>
     </div>
   </div>
 </section>
@@ -622,6 +720,7 @@
       <div class="footer-brand">
         <div class="name">Saint Barth Gorilla Fund</div>
         <div class="sub">Conservation &amp; Community Trust</div>
+        <p style="margin-top:14px; font-size:13px; max-width:260px;">Wellesley, Massachusetts — giving directed to conservation and community partners in Uganda, Rwanda, and Tanzania.</p>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
@@ -680,32 +779,31 @@
   });
 
   /* =========================================================
-     DONATION MODULE — PayPal (no backend required)
+     DONATION MODULE — PayPal JS SDK (Smart Payment Buttons)
      -----------------------------------------------------------
-     Replace PAYPAL_BUSINESS_EMAIL below with the Fund's actual
-     PayPal business email (or PayPal.Me / merchant ID) to go
-     live. This uses PayPal's hosted donation flow, so no
-     server or payment code is required — GitHub Pages can host
-     this as-is once the email is set.
-     For monthly giving, PayPal's subscription buttons require
-     a "Recurring Payments" hosted button ID from your PayPal
-     account — set MONTHLY_HOSTED_BUTTON_ID once created.
+     No backend required — this renders real PayPal / card / Venmo
+     buttons and creates + captures the order entirely client-side.
+
+     TO GO LIVE:
+     1. In the <head>, find the PayPal SDK <script> tag and replace
+        client-id=test with your own LIVE client ID from
+        developer.paypal.com (Apps & Credentials → your app →
+        Client ID, "Live" tab).
+     2. That's it — both donation buttons below use that same SDK.
+
+     Note: client-side order creation is fine for a donations flow
+     like this one, but PayPal recommends validating amounts
+     server-side for higher-value or fraud-sensitive transactions.
      ========================================================= */
-  const PAYPAL_BUSINESS_EMAIL = "fund@stbarthgorillafund.org"; // TODO: replace with real PayPal business email
-  const MONTHLY_HOSTED_BUTTON_ID = ""; // TODO: optional — PayPal recurring "hosted button id"
 
   let selectedFreq = 'one-time';
   let selectedAmount = 100;
 
   const amountGrid = document.getElementById('amountGrid');
   const customAmt = document.getElementById('customAmt');
-  const donateBtn = document.getElementById('donateBtn');
   const toggleRow = document.querySelector('.toggle-row');
-
-  function refreshButtonLabel(){
-    const amt = parseFloat(customAmt.value) || 0;
-    donateBtn.textContent = `Give $${amt.toLocaleString()} ${selectedFreq === 'monthly' ? '/ Month' : 'One-Time'} →`;
-  }
+  const monthlyNote = document.getElementById('monthlyNote');
+  const donateButtonContainer = document.getElementById('paypal-button-donate');
 
   amountGrid.addEventListener('click', (e) => {
     const btn = e.target.closest('.amt-btn');
@@ -714,64 +812,158 @@
     btn.classList.add('active');
     selectedAmount = parseFloat(btn.dataset.amt);
     customAmt.value = selectedAmount;
-    refreshButtonLabel();
   });
 
   customAmt.addEventListener('input', () => {
     amountGrid.querySelectorAll('.amt-btn').forEach(b => b.classList.remove('active'));
-    refreshButtonLabel();
   });
+
+  function setFrequency(freq){
+    selectedFreq = freq;
+    toggleRow.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.freq === freq));
+    const isMonthly = freq === 'monthly';
+    monthlyNote.style.display = isMonthly ? 'block' : 'none';
+    donateButtonContainer.style.display = isMonthly ? 'none' : 'block';
+  }
 
   toggleRow.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-freq]');
     if (!btn) return;
-    toggleRow.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    selectedFreq = btn.dataset.freq;
-    refreshButtonLabel();
+    setFrequency(btn.dataset.freq);
   });
 
-  donateBtn.addEventListener('click', () => {
-    const amount = parseFloat(customAmt.value);
-    if (!amount || amount <= 0) { alert('Please enter a valid gift amount.'); return; }
-    const designation = document.getElementById('designation').value;
+  function showThankYou(container, details, amount){
+    const name = details && details.payer && details.payer.name ? details.payer.name.given_name : '';
+    container.innerHTML = `<p style="font-family:var(--serif); font-size:19px; color:var(--gold-light);">Thank you${name ? ', ' + name : ''} — your gift of $${amount.toFixed(2)} was received.</p>`;
+  }
 
-    if (selectedFreq === 'monthly' && MONTHLY_HOSTED_BUTTON_ID) {
-      // Recurring donation via PayPal hosted subscription button
-      const form = document.createElement('form');
-      form.action = 'https://www.paypal.com/cgi-bin/webscr';
-      form.method = 'post';
-      form.target = '_blank';
-      const fields = {
-        cmd: '_s-xclick',
-        hosted_button_id: MONTHLY_HOSTED_BUTTON_ID,
-        a3: amount.toFixed(2),
-        item_name: `Saint Barth Gorilla Fund — ${designation}`
-      };
-      Object.entries(fields).forEach(([k,v]) => {
-        const input = document.createElement('input');
-        input.type = 'hidden'; input.name = k; input.value = v;
-        form.appendChild(input);
-      });
-      document.body.appendChild(form);
-      form.submit();
-      form.remove();
-      return;
+  // Guard in case the SDK fails to load (ad blockers, offline preview, etc.)
+  if (typeof paypal !== 'undefined') {
+
+    // --- Main "Support the Fund" donate button ---
+    paypal.Buttons({
+      style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'donate' },
+      createOrder: function(data, actions) {
+        const amount = parseFloat(customAmt.value);
+        if (!amount || amount <= 0) {
+          alert('Please enter a valid gift amount.');
+          return Promise.reject(new Error('Invalid amount'));
+        }
+        const designation = document.getElementById('designation').value;
+        return actions.order.create({
+          purchase_units: [{
+            description: `Saint Barth Gorilla Fund — ${designation}`.slice(0, 127),
+            amount: { value: amount.toFixed(2), currency_code: 'USD' }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details){
+          showThankYou(donateButtonContainer, details, parseFloat(customAmt.value));
+        });
+      },
+      onError: function(err) {
+        console.error('PayPal error:', err);
+        alert('Something went wrong starting checkout. Please try again in a moment.');
+      }
+    }).render('#paypal-button-donate');
+
+    // --- Registry checklist "Give These Items" button ---
+    paypal.Buttons({
+      style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'donate' },
+      createOrder: function(data, actions) {
+        const selected = [];
+        let total = 0;
+        registryCheckboxes.forEach(cb => {
+          if (cb.checked) {
+            const amt = registryItemAmount(cb);
+            if (amt > 0) { total += amt; selected.push(cb.dataset.name); }
+          }
+        });
+        if (total <= 0) {
+          alert('Select at least one item to give toward.');
+          return Promise.reject(new Error('No items selected'));
+        }
+        let itemLabel = selected.slice(0, 3).join(', ');
+        if (selected.length > 3) itemLabel += `, +${selected.length - 3} more`;
+        return actions.order.create({
+          purchase_units: [{
+            description: `Saint Barth Gorilla Fund Registry — ${itemLabel}`.slice(0, 127),
+            amount: { value: total.toFixed(2), currency_code: 'USD' }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details){
+          let total = 0;
+          registryCheckboxes.forEach(cb => { if (cb.checked) total += registryItemAmount(cb); });
+          showThankYou(document.getElementById('paypal-button-registry'), details, total);
+        });
+      },
+      onError: function(err) {
+        console.error('PayPal error:', err);
+        alert('Something went wrong starting checkout. Please try again in a moment.');
+      }
+    }).render('#paypal-button-registry');
+
+  } else {
+    donateButtonContainer.innerHTML = '<p class="donate-note">Payment button failed to load — check your connection or ad blocker, then refresh.</p>';
+  }
+
+  setFrequency('one-time');
+
+  /* =========================================================
+     REGISTRY CHECKLIST — running total (feeds the PayPal button above)
+     ========================================================= */
+  const registryCheckboxes = document.querySelectorAll('.reg-row input[type=checkbox]');
+  const rbCount = document.getElementById('rbCount');
+  const rbTotal = document.getElementById('rbTotal');
+
+  function getCustomInput(checkbox){
+    return document.querySelector(`.ri-custom[data-for="${checkbox.id}"]`);
+  }
+
+  function registryItemAmount(checkbox){
+    if (checkbox.dataset.custom === 'true') {
+      const input = getCustomInput(checkbox);
+      return input ? (parseFloat(input.value) || 0) : 0;
     }
+    return parseFloat(checkbox.dataset.amt) || 0;
+  }
 
-    // One-time donation via PayPal Donate flow
-    const params = new URLSearchParams({
-      cmd: '_donations',
-      business: PAYPAL_BUSINESS_EMAIL,
-      item_name: `Saint Barth Gorilla Fund — ${designation}`,
-      amount: amount.toFixed(2),
-      currency_code: 'USD',
-      no_shipping: '1'
+  function recalcRegistry(){
+    let total = 0;
+    let count = 0;
+    registryCheckboxes.forEach(cb => {
+      if (cb.checked) {
+        const amt = registryItemAmount(cb);
+        if (amt > 0) { total += amt; count += 1; }
+      }
     });
-    window.open(`https://www.paypal.com/cgi-bin/webscr?${params.toString()}`, '_blank', 'noopener');
+    rbCount.textContent = `${count} item${count === 1 ? '' : 's'} selected`;
+    rbTotal.textContent = `$${total.toLocaleString(undefined, {maximumFractionDigits: 0})}`;
+  }
+
+  registryCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      if (cb.dataset.custom === 'true') {
+        const input = getCustomInput(cb);
+        const row = cb.closest('.reg-row');
+        if (input) {
+          input.disabled = !cb.checked;
+          row.classList.toggle('disabled', !cb.checked);
+          if (cb.checked) input.focus();
+        }
+      }
+      recalcRegistry();
+    });
   });
 
-  refreshButtonLabel();
+  document.querySelectorAll('.ri-custom').forEach(input => {
+    input.addEventListener('input', recalcRegistry);
+  });
+
+  recalcRegistry();
 </script>
 
 </body>
