@@ -1,506 +1,777 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>St Barth Gorilla Fund — Item Registry</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary-dark: #122219;
-      --accent-gold: #c5a059;
-      --accent-gold-hover: #b08d48;
-      --bg-cream: #f9f6f0;
-      --card-bg: #ffffff;
-      --border-color: #e5dfd5;
-      --text-dark: #222222;
-      --text-muted: #666666;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Saint Barth Gorilla Fund — Conservation & Community Trust</title>
+<meta name="description" content="The philanthropic trust of Saint Barth Gorilla Expeditions, directing a share of every journey to conservation and community partners in Uganda, Rwanda, and Tanzania." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0b0c0a;
+    --charcoal:#15140f;
+    --charcoal-2:#1c1a13;
+    --ivory:#f4efe2;
+    --ivory-dim:#cfc8b4;
+    --gold:#c8a15b;
+    --gold-light:#e6cd97;
+    --line: rgba(244,239,226,0.14);
+    --line-strong: rgba(244,239,226,0.28);
+    --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+    --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+    --maxw: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--black);
+    color:var(--ivory);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:11px;
+    letter-spacing:0.32em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:inline-block;
+    margin-bottom:18px;
+  }
+  h1,h2,h3,h4{
+    font-family:var(--serif);
+    font-weight:500;
+    color:var(--ivory);
+    letter-spacing:0.01em;
+  }
+  h2{font-size:clamp(30px, 4vw, 46px); line-height:1.15; font-weight:500;}
+  h2 em, h1 em{font-style:italic; color:var(--gold-light); font-weight:400;}
+  p{color:var(--ivory-dim); font-weight:300;}
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--sans);
+    font-size:12px;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    padding:16px 30px;
+    border:1px solid var(--gold);
+    color:var(--gold-light);
+    background:transparent;
+    cursor:pointer;
+    transition:all .35s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{background:var(--gold); color:var(--black);}
+  .btn.solid{background:var(--gold); color:var(--black);}
+  .btn.solid:hover{background:var(--gold-light); border-color:var(--gold-light);}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:linear-gradient(to bottom, rgba(11,12,10,0.92), rgba(11,12,10,0));
+    padding:22px 0;
+    transition:padding .3s ease, background .3s ease;
+  }
+  header.scrolled{
+    background:rgba(11,12,10,0.96);
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{display:flex; align-items:center; justify-content:space-between;}
+  .brand{
+    display:flex; flex-direction:column; line-height:1;
+  }
+  .brand .name{
+    font-family:var(--serif); font-size:22px; letter-spacing:0.04em; color:var(--ivory);
+  }
+  .brand .sub{
+    font-family:var(--sans); font-size:9px; letter-spacing:0.24em; text-transform:uppercase; color:var(--gold); margin-top:5px;
+  }
+  .navlinks{display:flex; gap:38px; align-items:center;}
+  .navlinks a{
+    font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ivory-dim);
+    padding-bottom:4px; border-bottom:1px solid transparent; transition:all .25s;
+  }
+  .navlinks a:hover{color:var(--gold-light); border-color:var(--gold);}
+  .navlinks .btn{padding:11px 22px;}
+  .burger{display:none; flex-direction:column; gap:5px; cursor:pointer; background:none; border:none;}
+  .burger span{width:24px; height:1px; background:var(--ivory);}
 
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
-      padding: 40px 20px;
-      line-height: 1.6;
-    }
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,161,91,0.18), transparent 60%),
+      linear-gradient(180deg, #0b0c0a 0%, #14140e 55%, #0b0c0a 100%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, transparent 0 60px, rgba(244,239,226,0.02) 60px 61px),
+      repeating-linear-gradient(25deg, transparent 0 90px, rgba(200,161,91,0.02) 90px 91px);
+    pointer-events:none;
+  }
+  .hero-content{position:relative; z-index:2; padding-top:140px; padding-bottom:100px;}
+  .hero .tag{font-family:var(--serif); font-style:italic; font-size:18px; color:var(--gold-light); margin-bottom:22px; display:block;}
+  .hero h1{font-size:clamp(40px, 6.4vw, 78px); line-height:1.06; max-width:920px;}
+  .hero p.lead{max-width:560px; margin-top:26px; font-size:17px; color:var(--ivory-dim);}
+  .hero-ctas{display:flex; gap:18px; margin-top:44px; flex-wrap:wrap;}
+  .hero-stats{
+    margin-top:88px; display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+    max-width:820px;
+  }
+  .hero-stats div{background:var(--black); padding:26px 28px;}
+  .hero-stats .num{font-family:var(--serif); font-size:32px; color:var(--gold-light); font-weight:500;}
+  .hero-stats .label{font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ivory-dim); margin-top:8px;}
 
-    .donation-container {
-      max-width: 850px;
-      margin: 0 auto;
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      padding: 40px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    }
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:120px 0; position:relative;}
+  .section-head{max-width:680px; margin-bottom:64px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+  .divider{
+    height:1px; background:var(--line); max-width:var(--maxw); margin:0 auto;
+  }
 
-    .brand-header {
-      text-align: center;
-      margin-bottom: 30px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 25px;
-    }
+  /* ---------- MISSION / PILLARS ---------- */
+  .mission-grid{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;}
+  .mission-grid p{font-size:16px; margin-bottom:18px;}
+  .pillars{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); margin-top:110px;
+  }
+  .pillar{background:var(--black); padding:44px 36px;}
+  .pillar .mark{
+    font-family:var(--serif); font-style:italic; color:var(--gold); font-size:15px; margin-bottom:22px; display:block;
+  }
+  .pillar h3{font-size:24px; margin-bottom:14px; font-weight:500;}
+  .pillar p{font-size:14.5px;}
 
-    .brand-subtitle {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--accent-gold);
-      margin-bottom: 8px;
-      font-weight: 600;
-    }
+  /* ---------- PARTNERS ---------- */
+  .country-block{margin-bottom:88px;}
+  .country-block:last-child{margin-bottom:0;}
+  .country-head{
+    display:flex; align-items:baseline; gap:18px; margin-bottom:36px;
+    border-bottom:1px solid var(--line); padding-bottom:18px;
+  }
+  .country-head h3{font-size:28px; color:var(--gold-light); font-weight:500;}
+  .country-head span{font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ivory-dim);}
+  .partner-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line);}
+  .partner-card{background:var(--charcoal); padding:32px 30px; display:flex; flex-direction:column; min-height:190px;}
+  .partner-card .cat{font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:12px;}
+  .partner-card h4{font-size:21px; font-weight:500; margin-bottom:10px; line-height:1.25;}
+  .partner-card p{font-size:14px; flex-grow:1;}
+  .partner-card .link{
+    margin-top:16px; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ivory-dim);
+    border-top:1px solid var(--line); padding-top:14px;
+  }
+  .partner-card .link a{color:var(--gold-light); border-bottom:1px solid transparent;}
+  .partner-card .link a:hover{border-color:var(--gold-light);}
 
-    .donation-title {
-      font-family: 'Cinzel', serif;
-      font-size: 28px;
-      color: var(--primary-dark);
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
+  /* ---------- FIELD LEDGER (signature element) ---------- */
+  .ledger{
+    background:var(--charcoal); border:1px solid var(--line); margin-top:90px;
+  }
+  .ledger-head{
+    display:flex; justify-content:space-between; align-items:flex-end; padding:36px 40px 24px;
+    border-bottom:1px solid var(--line); flex-wrap:wrap; gap:16px;
+  }
+  .ledger-head h3{font-size:24px; font-weight:500;}
+  .ledger-head p{font-size:13px; max-width:380px;}
+  .ledger-rows{padding:8px 40px 32px;}
+  .ledger-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 0; border-bottom:1px solid var(--line); gap:20px;
+  }
+  .ledger-row:last-child{border-bottom:none;}
+  .ledger-row .li-name{font-family:var(--serif); font-size:19px; color:var(--ivory);}
+  .ledger-row .li-org{font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory-dim); margin-top:4px;}
+  .ledger-row .li-amt{font-family:var(--serif); font-size:19px; color:var(--gold-light); white-space:nowrap;}
 
-    .donation-description {
-      font-size: 14px;
-      color: var(--text-muted);
-      max-width: 600px;
-      margin: 0 auto;
-      font-weight: 300;
-    }
+  /* ---------- GET INVOLVED ---------- */
+  .involved-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:1px; background:var(--line); border:1px solid var(--line);}
+  .involved-panel{background:var(--black); padding:48px 44px;}
+  .involved-panel.dark{background:var(--charcoal);}
+  .involved-panel h3{font-size:26px; margin-bottom:16px;}
+  .involved-panel p{font-size:15px; margin-bottom:14px;}
+  .involved-list{margin-top:20px;}
+  .involved-list li{list-style:none; padding:14px 0; border-top:1px solid var(--line); font-size:14px; color:var(--ivory-dim);}
+  .involved-list li strong{color:var(--ivory); font-weight:400; font-family:var(--serif); font-size:16px;}
 
-    /* Tab Navigation */
-    .tab-menu {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 30px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 15px;
-      justify-content: center;
-    }
+  .newsletter{display:flex; gap:0; margin-top:26px; max-width:420px; border:1px solid var(--line-strong);}
+  .newsletter input{
+    flex:1; background:transparent; border:none; padding:16px 16px; color:var(--ivory); font-family:var(--sans); font-size:13px; outline:none;
+  }
+  .newsletter input::placeholder{color:var(--ivory-dim);}
+  .newsletter button{
+    border:none; background:var(--gold); color:var(--black); padding:0 22px; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; cursor:pointer;
+  }
+  .newsletter button:hover{background:var(--gold-light);}
 
-    .tab-btn {
-      background: transparent;
-      border: 1px solid var(--border-color);
-      padding: 10px 16px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-dark);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border-radius: 2px;
-    }
+  /* ---------- DONATE ---------- */
+  .donate-section{
+    background:linear-gradient(180deg, var(--charcoal) 0%, var(--black) 100%);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .donate-wrap{display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:flex-start;}
+  .donate-form{
+    background:var(--black); border:1px solid var(--line-strong); padding:44px;
+  }
+  .amounts{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:22px 0 26px;}
+  .amt-btn{
+    padding:14px 6px; text-align:center; border:1px solid var(--line-strong); background:transparent; color:var(--ivory);
+    font-family:var(--serif); font-size:17px; cursor:pointer; transition:all .2s;
+  }
+  .amt-btn.active, .amt-btn:hover{border-color:var(--gold); color:var(--gold-light); background:rgba(200,161,91,0.08);}
+  .field{margin-bottom:20px;}
+  .field label{display:block; font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ivory-dim); margin-bottom:9px;}
+  .field input[type=number], .field select{
+    width:100%; background:transparent; border:none; border-bottom:1px solid var(--line-strong); color:var(--ivory);
+    font-family:var(--serif); font-size:19px; padding:8px 2px; outline:none;
+  }
+  .field select{-webkit-appearance:none; appearance:none; background:transparent; cursor:pointer;}
+  .field select option{background:var(--black); color:var(--ivory);}
+  .toggle-row{display:flex; gap:1px; background:var(--line-strong); margin-bottom:26px; border:1px solid var(--line-strong);}
+  .toggle-row button{
+    flex:1; background:var(--black); border:none; color:var(--ivory-dim); padding:13px; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; cursor:pointer;
+  }
+  .toggle-row button.active{background:var(--gold); color:var(--black);}
+  .donate-submit{width:100%; margin-top:8px; justify-content:center;}
+  .donate-note{font-size:11.5px; color:var(--ivory-dim); margin-top:16px; text-align:center; line-height:1.6;}
+  .donate-copy .eyebrow{margin-bottom:18px;}
+  .donate-copy h2{margin-bottom:22px;}
+  .donate-copy p{font-size:16px; margin-bottom:16px;}
+  .other-ways{margin-top:36px; padding-top:30px; border-top:1px solid var(--line);}
+  .other-ways h4{font-size:15px; letter-spacing:0.08em; color:var(--gold-light); margin-bottom:12px; font-family:var(--sans); font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.18em;}
+  .other-ways p{font-size:13.5px;}
 
-    .tab-btn:hover {
-      border-color: var(--accent-gold);
-      color: var(--accent-gold);
-    }
+  /* ---------- CONTACT / FOOTER ---------- */
+  .contact-section{text-align:center;}
+  .contact-section h2{margin-bottom:20px;}
+  .contact-section p.lead{max-width:520px; margin:0 auto 40px; font-size:16px;}
+  .contact-links{display:flex; gap:44px; justify-content:center; flex-wrap:wrap;}
+  .contact-links .item .label{font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:8px;}
+  .contact-links .item .value{font-family:var(--serif); font-size:20px; color:var(--ivory);}
 
-    .tab-btn.active {
-      background-color: var(--primary-dark);
-      color: #ffffff;
-      border-color: var(--primary-dark);
-    }
+  footer{border-top:1px solid var(--line); padding:56px 0 32px;}
+  .footer-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:36px; margin-bottom:44px;}
+  .footer-brand .name{font-family:var(--serif); font-size:24px;}
+  .footer-brand .sub{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-top:8px;}
+  .footer-cols{display:flex; gap:70px; flex-wrap:wrap;}
+  .footer-col h5{font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; font-weight:500; font-family:var(--sans);}
+  .footer-col a, .footer-col p{display:block; font-size:13px; color:var(--ivory-dim); margin-bottom:10px;}
+  .footer-col a:hover{color:var(--gold-light);}
+  .footer-bottom{
+    display:flex; justify-content:space-between; padding-top:28px; border-top:1px solid var(--line);
+    font-size:11px; color:var(--ivory-dim); flex-wrap:wrap; gap:12px;
+  }
+  .footer-bottom a{color:var(--ivory-dim);}
+  .footer-bottom a:hover{color:var(--gold-light);}
 
-    .tab-content {
-      display: none;
-    }
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
 
-    .tab-content.active {
-      display: block;
-    }
-
-    .section-title {
-      font-family: 'Cinzel', serif;
-      font-size: 18px;
-      color: var(--primary-dark);
-      margin-bottom: 15px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    /* List Items */
-    .donation-item {
-      display: flex;
-      align-items: center;
-      padding: 14px 10px;
-      border-bottom: 1px solid #f2eee9;
-      transition: background 0.2s ease;
-    }
-
-    .donation-item:hover {
-      background-color: #faf8f5;
-    }
-
-    .donation-item input[type="checkbox"] {
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      border: 1px solid var(--accent-gold);
-      border-radius: 2px;
-      outline: none;
-      cursor: pointer;
-      position: relative;
-      margin-right: 15px;
-      flex-shrink: 0;
-    }
-
-    .donation-item input[type="checkbox"]:checked {
-      background-color: var(--primary-dark);
-      border-color: var(--primary-dark);
-    }
-
-    .donation-item input[type="checkbox"]:checked::after {
-      content: '✓';
-      position: absolute;
-      color: white;
-      font-size: 12px;
-      top: -1px;
-      left: 3px;
-    }
-
-    .donation-item label {
-      font-size: 14px;
-      color: var(--text-dark);
-      cursor: pointer;
-      flex-grow: 1;
-    }
-
-    /* Summary & Actions */
-    .summary-card {
-      margin-top: 35px;
-      background-color: var(--primary-dark);
-      color: #ffffff;
-      padding: 25px;
-      border-radius: 2px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .summary-label {
-      font-family: 'Cinzel', serif;
-      font-size: 16px;
-      letter-spacing: 1px;
-      color: var(--accent-gold);
-    }
-
-    .total-amount {
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      font-weight: 600;
-    }
-
-    .currency-breakdown {
-      font-size: 13px;
-      color: #bbbbbb;
-      text-align: right;
-    }
-
-    .donate-btn {
-      width: 100%;
-      background-color: var(--accent-gold);
-      color: #ffffff;
-      border: none;
-      padding: 16px;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      border-radius: 2px;
-      margin-top: 10px;
-    }
-
-    .donate-btn:hover {
-      background-color: var(--accent-gold-hover);
-    }
-
-    @media (max-width: 600px) {
-      .donation-container {
-        padding: 20px;
-      }
-      .tab-btn {
-        width: 100%;
-      }
-    }
-  </style>
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .navlinks{position:fixed; top:0; right:-100%; width:78%; max-width:340px; height:100vh; background:var(--charcoal);
+      flex-direction:column; align-items:flex-start; padding:110px 34px 40px; transition:right .4s ease; border-left:1px solid var(--line);}
+    .navlinks.open{right:0;}
+    .navlinks a{font-size:13px;}
+    .burger{display:flex;}
+    .mission-grid{grid-template-columns:1fr; gap:40px;}
+    .pillars{grid-template-columns:1fr;}
+    .partner-grid{grid-template-columns:1fr;}
+    .involved-grid{grid-template-columns:1fr;}
+    .donate-wrap{grid-template-columns:1fr; gap:44px;}
+    .hero-stats{grid-template-columns:1fr;}
+    .footer-cols{gap:40px;}
+    .amounts{grid-template-columns:repeat(4,1fr);}
+    section{padding:80px 0;}
+  }
+</style>
 </head>
 <body>
 
-<div class="donation-container">
-  <div class="brand-header">
-    <p class="brand-subtitle">St. Barth Gorilla Expeditions</p>
-    <h1 class="donation-title">St. Barth Gorilla Fund</h1>
-    <p class="donation-description">Select specific operational, educational, or infrastructure items below to direct your contribution to local partner initiatives.</p>
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="brand">
+      <span class="name">Saint Barth Gorilla Fund</span>
+      <span class="sub">Conservation &amp; Community Trust</span>
+    </a>
+    <div class="navlinks" id="navLinks">
+      <a href="#mission">Our Purpose</a>
+      <a href="#partners">Field Partners</a>
+      <a href="#involved">Get Involved</a>
+      <a href="#contact">Contact</a>
+      <a href="#donate" class="btn">Give Now</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-content">
+    <span class="tag reveal">The philanthropic trust of Saint Barth Gorilla Expeditions</span>
+    <h1 class="reveal">Every journey <em>gives back</em> to the ground it travels.</h1>
+    <p class="lead reveal">We direct a share of every expedition's profit — and open the door for our guests to give further — to the conservationists, schools, and communities of Uganda, Rwanda, and Tanzania.</p>
+    <div class="hero-ctas reveal">
+      <a href="#donate" class="btn solid">Give Now</a>
+      <a href="#partners" class="btn">Meet Our Field Partners</a>
+    </div>
+    <div class="hero-stats reveal">
+      <div><div class="num">3</div><div class="label">Countries in the Field</div></div>
+      <div><div class="num">11+</div><div class="label">Vetted Partner Organizations</div></div>
+      <div><div class="num">100%</div><div class="label">Of Designated Gifts Reach the Field</div></div>
+    </div>
   </div>
+</section>
 
-  <!-- Navigation Tabs -->
-  <div class="tab-menu">
-    <button class="tab-btn active" onclick="openTab(event, 'gifted')">Gifted Child School</button>
-    <button class="tab-btn" onclick="openTab(event, 'admin')">Rushaga: Admin Block</button>
-    <button class="tab-btn" onclick="openTab(event, 'dining')">Rushaga: Dining Hall</button>
-    <button class="tab-btn" onclick="openTab(event, 'dorm')">Rushaga: Boys Dormitory</button>
-    <button class="tab-btn" onclick="openTab(event, 'teachers')">Rushaga: Teacher's House</button>
-    <button class="tab-btn" onclick="openTab(event, 'salaries')">Rushaga: Operating & Salaries</button>
+<div class="divider"></div>
+
+<section id="mission">
+  <div class="wrap">
+    <div class="mission-grid">
+      <div class="reveal">
+        <span class="eyebrow">Our Purpose</span>
+        <h2>Conservation isn't a line item.<br>It's part of the itinerary.</h2>
+      </div>
+      <div class="reveal">
+        <p>Saint Barth Gorilla Expeditions was built on the belief that extraordinary travel and genuine stewardship belong on the same itinerary. The Saint Barth Gorilla Fund is how we make that permanent: a portion of every journey's proceeds is directed to conservation and community partners working where our guests travel.</p>
+        <p>Guests are invited to meet the people behind the work — visiting a school in Loliondo, sitting with a Maasai women's cooperative, or joining a ranger briefing in the Virunga range — and to give directly, on the ground, to the projects that move them. At home in St Barts, we widen the circle further, hosting gatherings and events to raise additional support for the Fund each year.</p>
+      </div>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <span class="mark">The Pledge</span>
+        <h3>Give With Every Journey</h3>
+        <p>A fixed share of profit from each Saint Barth Gorilla Expeditions journey is contributed to the Fund automatically — no guest action required.</p>
+      </div>
+      <div class="pillar reveal">
+        <span class="mark">The Encounter</span>
+        <h3>Meet the Communities</h3>
+        <p>Guests visit partner schools, cooperatives, and research stations in person — to listen, volunteer an afternoon, and give directly if moved to.</p>
+      </div>
+      <div class="pillar reveal">
+        <span class="mark">The Gathering</span>
+        <h3>Raise Together in St Barts</h3>
+        <p>Each season we host events on the island — bringing our community together to expand what the Fund can support in the field.</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <form id="donationForm">
-    
-    <!-- Gifted Child Foundation Primary School (USD) -->
-    <div id="gifted" class="tab-content active">
-      <div class="section-title">Gifted Child Foundation Primary School (USD)</div>
-      <div class="donation-item">
-        <input type="checkbox" id="g1" data-cost="2200" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g1">1 Month Staff Salary (16 staff) — $2,200</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g2" data-cost="2000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g2">1 Month Lunch & Dinner (120 pupils) — $2,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g3" data-cost="600" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g3">1 Month Breakfast (120 pupils) — $600</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g4" data-cost="8500" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g4">Completing 2 Classrooms — $8,500</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g5" data-cost="23000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g5">Construction of Boys Dormitory — $23,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g6" data-cost="3000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g6">20KW 3-Phase Solar Power System — $3,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g7" data-cost="20000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g7">School Van — $20,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g8" data-cost="600" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g8">Text Books — $600</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g9" data-cost="5700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g9">Construction of 5-Stance Latrine — $5,700</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g10" data-cost="1700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g10">School Shoes — $1,700</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g11" data-cost="1700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g11">School Sweaters (120 pupils) — $1,700</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g12" data-cost="1370" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g12">School Uniforms (120 pupils) — $1,370</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="g13" data-cost="10000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label for="g13">Perimeter Wall Construction — $10,000</label>
+<div class="divider"></div>
+
+<section id="partners">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Field Partners</span>
+      <h2>Where the giving goes</h2>
+    </div>
+
+    <div class="country-block reveal">
+      <div class="country-head"><h3>Tanzania</h3><span>Northern Serengeti &amp; Loliondo</span></div>
+      <div class="partner-grid">
+        <div class="partner-card">
+          <span class="cat">Community &amp; Conservation</span>
+          <h4>Serengeti Preservation Foundation</h4>
+          <p>Based in Loliondo, working directly with Maasai communities on women's entrepreneurship, conservation education, sustainable agriculture, and school programs.</p>
+          <div class="link">Loliondo, Tanzania</div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Wildlife Conservation</span>
+          <h4>Frankfurt Zoological Society — Serengeti Programme</h4>
+          <p>Major conservation work across the entire Serengeti ecosystem, including anti-poaching, habitat restoration, and predator monitoring in the northern migration corridors.</p>
+          <div class="link"><a href="https://fzs.org/en/programs/tanzania/serengeti-national-park/" target="_blank" rel="noopener">fzs.org</a></div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Research &amp; Science</span>
+          <h4>Tanzania Wildlife Research Institute (TAWIRI)</h4>
+          <p>The Serengeti Wildlife Research Centre in Seronera supports lion, elephant, leopard, and rhino research, GPS tracking programs, and student field science.</p>
+          <div class="link"><a href="https://www.tawiri.or.tz/serengeti-wildlife-research-center/" target="_blank" rel="noopener">tawiri.or.tz</a></div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Education</span>
+          <h4>Bright English Medium School (BEMS)</h4>
+          <p>Founded as an orphanage for vulnerable Maasai children in Loliondo, now a full school with boarding facilities, supported through student sponsorship and infrastructure gifts.</p>
+          <div class="link"><a href="https://loliondoproject.wixsite.com/bems" target="_blank" rel="noopener">Sponsor a student</a></div>
+        </div>
       </div>
     </div>
 
-    <!-- Rushaga Administration Block (UGX) -->
-    <div id="admin" class="tab-content">
-      <div class="section-title">Rushaga Administration Block Construction (UGX)</div>
-      <div class="donation-item">
-        <input type="checkbox" id="a1" data-cost="9000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="a1">Cement (200 bags) — UGX 9,000,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="a2" data-cost="2250000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="a2">Bricks (4,500 truck) — UGX 2,250,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="a3" data-cost="3200000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="a3">Aggregate (8 trucks) — UGX 3,200,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="a4" data-cost="15000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="a4">Sand (50 trucks) — UGX 15,000,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="a5" data-cost="2600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="a5">Hardcore Stones (12 trucks) — UGX 2,600,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="a6" data-cost="12600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="a6">Mason Labour (90 days) — UGX 12,600,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="a7" data-cost="9000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="a7">Porters Labour (8 porters / 90 days) — UGX 9,000,000</label>
-      </div>
-    </div>
-
-    <!-- Rushaga Dining Hall (UGX) -->
-    <div id="dining" class="tab-content">
-      <div class="section-title">Rushaga Main Hall / Dining (UGX)</div>
-      <div class="donation-item">
-        <input type="checkbox" id="d1" data-cost="4500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="d1">Cement (100 bags) — UGX 4,500,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="d2" data-cost="4800000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="d2">Sand (15 trucks) — UGX 4,800,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="d3" data-cost="2700000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="d3">Stones (9 trucks) — UGX 2,700,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="d4" data-cost="2500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="d4">Bricks (5,000 pieces) — UGX 2,500,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="d5" data-cost="2000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="d5">Doors (5 doors) — UGX 2,000,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="d6" data-cost="1500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="d6">Windows (5 windows) — UGX 1,500,000</label>
+    <div class="country-block reveal">
+      <div class="country-head"><h3>Rwanda</h3><span>Volcanoes National Park &amp; the Virunga Range</span></div>
+      <div class="partner-grid">
+        <div class="partner-card">
+          <span class="cat">Wildlife Conservation</span>
+          <h4>Dian Fossey Gorilla Fund</h4>
+          <p>One of the world's leading mountain gorilla conservation organizations, based at the Ellen DeGeneres Campus — museum, research labs, and veterinary medicine programs.</p>
+          <div class="link"><a href="https://gorillafund.org/" target="_blank" rel="noopener">gorillafund.org</a></div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Women's Enterprise</span>
+          <h4>Kinigi Women Village</h4>
+          <p>A women-led artisan cooperative near Volcanoes National Park empowering women through weaving, tailoring, beading, and pottery — and fair-trade sales of their work.</p>
+          <div class="link"><a href="https://kinigiwomenvillage.com" target="_blank" rel="noopener">kinigiwomenvillage.com</a></div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Community &amp; Health</span>
+          <h4>Kwizera Charity Foundation</h4>
+          <p>A Kigali-based nonprofit supporting vulnerable children through education, nutrition, healthcare, counseling, and annual medical outreach for underserved families.</p>
+          <div class="link">Kigali, Rwanda</div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Education</span>
+          <h4>Nyabihu School for the Deaf</h4>
+          <p>Provides education, Rwandan Sign Language, and vocational training for deaf children in western Rwanda, many from families with limited access to specialized education.</p>
+          <div class="link"><a href="https://nsd.rw/" target="_blank" rel="noopener">nsd.rw</a></div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Veterinary Care</span>
+          <h4>Gorilla Doctors</h4>
+          <p>Field veterinarians providing direct, hands-on care to wild mountain and Grauer's gorillas across the Virunga and Bwindi ecosystems.</p>
+          <div class="link">Ruhengeri, Rwanda</div>
+        </div>
       </div>
     </div>
 
-    <!-- Rushaga Boys Dormitory (UGX) -->
-    <div id="dorm" class="tab-content">
-      <div class="section-title">Rushaga Boys Dormitory Building & Plumbing (UGX)</div>
-      <div class="donation-item">
-        <input type="checkbox" id="dm1" data-cost="6750000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="dm1">Cement (150 bags) — UGX 6,750,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="dm2" data-cost="7200000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="dm2">Sand (24 trucks) — UGX 7,200,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="dm3" data-cost="5600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="dm3">Doors (8 doors) — UGX 5,600,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="dm4" data-cost="10000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="dm4">Construction Labour — UGX 10,000,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="dm5" data-cost="2000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="dm5">Transport Costs — UGX 2,000,000</label>
+    <div class="country-block reveal">
+      <div class="country-head"><h3>Uganda</h3><span>Bwindi Impenetrable Forest</span></div>
+      <div class="partner-grid">
+        <div class="partner-card">
+          <span class="cat">Education</span>
+          <h4>Rushaga Community Primary School</h4>
+          <p>Serving the community bordering Bwindi's Rushaga trailhead, with active needs across classrooms, a boys' dormitory, staff housing, and daily operations.</p>
+          <div class="link">Kisoro, Uganda</div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Education</span>
+          <h4>Gifted Child Foundation Primary School</h4>
+          <p>A school for gifted children supporting 120 pupils, with needs spanning staff salaries, meals, classroom completion, and dormitory construction.</p>
+          <div class="link">Uganda</div>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Rushaga Teacher's House (UGX) -->
-    <div id="teachers" class="tab-content">
-      <div class="section-title">Rushaga Teacher's House Construction (UGX)</div>
-      <div class="donation-item">
-        <input type="checkbox" id="t1" data-cost="1350000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="t1">Cement (300 bags) — UGX 1,350,000</label>
+<div class="divider"></div>
+
+<section id="field-needs">
+  <div class="wrap">
+    <div class="ledger reveal">
+      <div class="ledger-head">
+        <div>
+          <span class="eyebrow" style="margin-bottom:8px;">Current Field Needs</span>
+          <h3>Designate your gift to a specific need</h3>
+        </div>
+        <p>A sample of active, itemized requests from our field partners. Select "Other / Field Needs" in the giving form and note any of these below.</p>
       </div>
-      <div class="donation-item">
-        <input type="checkbox" id="t2" data-cost="4500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="t2">Bricks (150,000) — UGX 4,500,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="t3" data-cost="5600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="t3">Iron Sheets (80 sheets) — UGX 5,600,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="t4" data-cost="14875000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="t4">Mason Labour (85 days) — UGX 14,875,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="t5" data-cost="8000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="t5">Porters Labour (80 days) — UGX 8,000,000</label>
+      <div class="ledger-rows">
+        <div class="ledger-row">
+          <div><div class="li-name">5-Stance Latrine Construction</div><div class="li-org">Gifted Child Foundation Primary School — Uganda</div></div>
+          <div class="li-amt">$5,700</div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="li-name">Boys' Dormitory Construction</div><div class="li-org">Gifted Child Foundation Primary School — Uganda</div></div>
+          <div class="li-amt">$23,000</div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="li-name">GPS Collar &amp; Tracking Equipment</div><div class="li-org">Frankfurt Zoological Society — Tanzania</div></div>
+          <div class="li-amt">from $300</div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="li-name">Term of School Fees, Boarding Child</div><div class="li-org">Rushaga Community Primary School — Uganda</div></div>
+          <div class="li-amt">~$80</div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="li-name">Hearing Aids &amp; School Supplies</div><div class="li-org">Nyabihu School for the Deaf — Rwanda</div></div>
+          <div class="li-amt">from $50</div>
+        </div>
+        <div class="ledger-row">
+          <div><div class="li-name">Vocational Training &amp; Equipment</div><div class="li-org">Kinigi Women Village — Rwanda</div></div>
+          <div class="li-amt">from $100</div>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Rushaga Salaries & Operating Costs (UGX) -->
-    <div id="salaries" class="tab-content">
-      <div class="section-title">Rushaga Operational & Staff Costs (UGX)</div>
-      <div class="donation-item">
-        <input type="checkbox" id="s1" data-cost="5000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="s1">1 Month Staff Salary (20 staff members) — UGX 5,000,000</label>
+<div class="divider"></div>
+
+<section id="involved">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Get Involved</span>
+      <h2>Beyond the safari</h2>
+    </div>
+    <div class="involved-grid reveal">
+      <div class="involved-panel">
+        <h3>On the Ground</h3>
+        <p>Every Saint Barth Gorilla Expeditions itinerary can include time with a Fund partner — a school visit, a cooperative workshop, a ranger briefing, or a private conservation talk at your camp.</p>
+        <ul class="involved-list">
+          <li><strong>Visit &amp; Volunteer</strong> — spend an afternoon at a partner school or cooperative during your journey.</li>
+          <li><strong>Sponsor Directly</strong> — fund a specific need from our Field Needs ledger, on the spot or after you return home.</li>
+          <li><strong>Private Talks</strong> — arrange an evening presentation from a researcher, vet, or ranger at your lodge.</li>
+        </ul>
       </div>
-      <div class="donation-item">
-        <input type="checkbox" id="s2" data-cost="15000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="s2">1 Term Staff Salary (3 months) — UGX 15,000,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="s3" data-cost="301000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="s3">Full Term Boarding Child Support (Incl. meals/supplies) — UGX 301,000</label>
-      </div>
-      <div class="donation-item">
-        <input type="checkbox" id="s4" data-cost="180000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label for="s4">Full Term Day Scholar Child Support — UGX 180,000</label>
+      <div class="involved-panel dark">
+        <h3>In St Barts</h3>
+        <p>We host seasonal gatherings on the island — dinners, auctions, and evenings with guest speakers from the field — to widen support for the Fund beyond our travelers.</p>
+        <p>Join the list to hear about the next one.</p>
+        <div class="newsletter">
+          <input type="email" placeholder="Email address" aria-label="Email address" id="newsletterEmail">
+          <button type="button" id="newsletterBtn">Notify Me</button>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- Summary Card -->
-    <div class="summary-card">
-      <div class="summary-row">
-        <span class="summary-label">Selected Total</span>
-        <span class="total-amount" id="totalUSD">$0 USD</span>
+<section class="donate-section" id="donate">
+  <div class="wrap">
+    <div class="donate-wrap">
+      <div class="donate-copy reveal">
+        <span class="eyebrow">Give Directly</span>
+        <h2>Support the Fund</h2>
+        <p>Gifts made here go directly to the Saint Barth Gorilla Fund and are allocated to our field partners, prioritizing the most urgent needs unless you designate otherwise.</p>
+        <p>Every gift, of any size, is felt in the field — a term of school fees, a set of hearing aids, a truck of bricks for a dormitory.</p>
+        <div class="other-ways">
+          <h4>Other Ways to Give</h4>
+          <p>Prefer to give by wire, check, or as part of your estate planning? Write to <a href="mailto:fund@stbarthgorillafund.org" style="color:var(--gold-light); border-bottom:1px solid var(--line-strong);">fund@stbarthgorillafund.org</a> and our team will assist directly.</p>
+        </div>
       </div>
-      <div class="currency-breakdown" id="totalUGX">Plus: UGX 0</div>
-      <button type="button" class="donate-btn">Proceed to Contribution</button>
-    </div>
 
-  </form>
-</div>
+      <div class="donate-form reveal">
+        <div class="toggle-row">
+          <button type="button" class="active" data-freq="one-time">One-Time</button>
+          <button type="button" data-freq="monthly">Monthly</button>
+        </div>
+
+        <div class="amounts" id="amountGrid">
+          <button type="button" class="amt-btn" data-amt="25">$25</button>
+          <button type="button" class="amt-btn active" data-amt="100">$100</button>
+          <button type="button" class="amt-btn" data-amt="250">$250</button>
+          <button type="button" class="amt-btn" data-amt="500">$500</button>
+        </div>
+
+        <div class="field">
+          <label for="customAmt">Amount (USD)</label>
+          <input type="number" id="customAmt" min="1" step="1" value="100">
+        </div>
+
+        <div class="field">
+          <label for="designation">Designate To</label>
+          <select id="designation">
+            <option value="Area of Greatest Need">Area of Greatest Need</option>
+            <option value="Serengeti Preservation Foundation">Serengeti Preservation Foundation — Tanzania</option>
+            <option value="Frankfurt Zoological Society">Frankfurt Zoological Society — Tanzania</option>
+            <option value="TAWIRI">TAWIRI Serengeti Wildlife Research Centre — Tanzania</option>
+            <option value="Bright English Medium School">Bright English Medium School — Tanzania</option>
+            <option value="Dian Fossey Gorilla Fund">Dian Fossey Gorilla Fund — Rwanda</option>
+            <option value="Kinigi Women Village">Kinigi Women Village — Rwanda</option>
+            <option value="Kwizera Charity Foundation">Kwizera Charity Foundation — Rwanda</option>
+            <option value="Nyabihu School for the Deaf">Nyabihu School for the Deaf — Rwanda</option>
+            <option value="Gorilla Doctors">Gorilla Doctors — Rwanda</option>
+            <option value="Rushaga Community Primary School">Rushaga Community Primary School — Uganda</option>
+            <option value="Gifted Child Foundation Primary School">Gifted Child Foundation Primary School — Uganda</option>
+          </select>
+        </div>
+
+        <button class="btn solid donate-submit" id="donateBtn" type="button">Give $100 One-Time →</button>
+        <p class="donate-note">You'll be securely redirected to PayPal to complete your gift. Saint Barth Gorilla Fund is a project of Saint Barth Gorilla Expeditions' philanthropic trust.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact" class="contact-section">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h2>Speak with the Fund directly</h2>
+    <p class="lead">For designated gifts, partnership inquiries, planned giving, or to arrange a field visit as part of your journey.</p>
+    <div class="contact-links">
+      <div class="item"><div class="label">Phone</div><div class="value"><a href="tel:+15082215527">+1 508 221 5527</a></div></div>
+      <div class="item"><div class="label">Email</div><div class="value"><a href="mailto:fund@stbarthgorillafund.org">fund@stbarthgorillafund.org</a></div></div>
+      <div class="item"><div class="label">Based In</div><div class="value">St Barthélemy, F.W.I.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="name">Saint Barth Gorilla Fund</div>
+        <div class="sub">Conservation &amp; Community Trust</div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Fund</h5>
+          <a href="#mission">Our Purpose</a>
+          <a href="#partners">Field Partners</a>
+          <a href="#donate">Give Now</a>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="https://www.stbarthgorillaexpeditions.com/" target="_blank" rel="noopener">Saint Barth Gorilla Expeditions</a>
+          <a href="#involved">Events in St Barts</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Saint Barth Gorilla Fund. All rights reserved.</span>
+      <span>A philanthropic project of <a href="https://www.stbarthgorillaexpeditions.com/" target="_blank" rel="noopener">Saint Barth Gorilla Expeditions</a></span>
+    </div>
+  </div>
+</footer>
 
 <script>
-  function openTab(evt, tabName) {
-    const contents = document.querySelectorAll('.tab-content');
-    contents.forEach(content => content.classList.remove('active'));
-    
-    const btns = document.querySelectorAll('.tab-btn');
-    btns.forEach(btn => btn.classList.remove('active'));
-    
-    document.getElementById(tabName).classList.add('active');
-    evt.currentTarget.classList.add('active');
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile nav
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Newsletter (placeholder — wire to Mailchimp/Formspree etc.)
+  document.getElementById('newsletterBtn').addEventListener('click', () => {
+    const emailInput = document.getElementById('newsletterEmail');
+    if (emailInput.value && emailInput.value.includes('@')) {
+      alert('Thank you — you\'re on the list. We\'ll be in touch before the next St Barts gathering.');
+      emailInput.value = '';
+    } else {
+      alert('Please enter a valid email address.');
+    }
+  });
+
+  /* =========================================================
+     DONATION MODULE — PayPal (no backend required)
+     -----------------------------------------------------------
+     Replace PAYPAL_BUSINESS_EMAIL below with the Fund's actual
+     PayPal business email (or PayPal.Me / merchant ID) to go
+     live. This uses PayPal's hosted donation flow, so no
+     server or payment code is required — GitHub Pages can host
+     this as-is once the email is set.
+     For monthly giving, PayPal's subscription buttons require
+     a "Recurring Payments" hosted button ID from your PayPal
+     account — set MONTHLY_HOSTED_BUTTON_ID once created.
+     ========================================================= */
+  const PAYPAL_BUSINESS_EMAIL = "fund@stbarthgorillafund.org"; // TODO: replace with real PayPal business email
+  const MONTHLY_HOSTED_BUTTON_ID = ""; // TODO: optional — PayPal recurring "hosted button id"
+
+  let selectedFreq = 'one-time';
+  let selectedAmount = 100;
+
+  const amountGrid = document.getElementById('amountGrid');
+  const customAmt = document.getElementById('customAmt');
+  const donateBtn = document.getElementById('donateBtn');
+  const toggleRow = document.querySelector('.toggle-row');
+
+  function refreshButtonLabel(){
+    const amt = parseFloat(customAmt.value) || 0;
+    donateBtn.textContent = `Give $${amt.toLocaleString()} ${selectedFreq === 'monthly' ? '/ Month' : 'One-Time'} →`;
   }
 
-  function calculateTotal() {
-    let usdTotal = 0;
-    let ugxTotal = 0;
-    
-    const items = document.querySelectorAll('.item-calc');
-    items.forEach(item => {
-      if (item.checked) {
-        const cost = parseFloat(item.getAttribute('data-cost'));
-        const currency = item.getAttribute('data-currency');
-        
-        if (currency === 'USD') {
-          usdTotal += cost;
-        } else if (currency === 'UGX') {
-          ugxTotal += cost;
-        }
-      }
+  amountGrid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.amt-btn');
+    if (!btn) return;
+    amountGrid.querySelectorAll('.amt-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedAmount = parseFloat(btn.dataset.amt);
+    customAmt.value = selectedAmount;
+    refreshButtonLabel();
+  });
+
+  customAmt.addEventListener('input', () => {
+    amountGrid.querySelectorAll('.amt-btn').forEach(b => b.classList.remove('active'));
+    refreshButtonLabel();
+  });
+
+  toggleRow.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-freq]');
+    if (!btn) return;
+    toggleRow.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedFreq = btn.dataset.freq;
+    refreshButtonLabel();
+  });
+
+  donateBtn.addEventListener('click', () => {
+    const amount = parseFloat(customAmt.value);
+    if (!amount || amount <= 0) { alert('Please enter a valid gift amount.'); return; }
+    const designation = document.getElementById('designation').value;
+
+    if (selectedFreq === 'monthly' && MONTHLY_HOSTED_BUTTON_ID) {
+      // Recurring donation via PayPal hosted subscription button
+      const form = document.createElement('form');
+      form.action = 'https://www.paypal.com/cgi-bin/webscr';
+      form.method = 'post';
+      form.target = '_blank';
+      const fields = {
+        cmd: '_s-xclick',
+        hosted_button_id: MONTHLY_HOSTED_BUTTON_ID,
+        a3: amount.toFixed(2),
+        item_name: `Saint Barth Gorilla Fund — ${designation}`
+      };
+      Object.entries(fields).forEach(([k,v]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden'; input.name = k; input.value = v;
+        form.appendChild(input);
+      });
+      document.body.appendChild(form);
+      form.submit();
+      form.remove();
+      return;
+    }
+
+    // One-time donation via PayPal Donate flow
+    const params = new URLSearchParams({
+      cmd: '_donations',
+      business: PAYPAL_BUSINESS_EMAIL,
+      item_name: `Saint Barth Gorilla Fund — ${designation}`,
+      amount: amount.toFixed(2),
+      currency_code: 'USD',
+      no_shipping: '1'
     });
-    
-    document.getElementById('totalUSD').innerText = '$' + usdTotal.toLocaleString() + ' USD';
-    document.getElementById('totalUGX').innerText = 'Plus: UGX ' + ugxTotal.toLocaleString();
-  }
+    window.open(`https://www.paypal.com/cgi-bin/webscr?${params.toString()}`, '_blank', 'noopener');
+  });
+
+  refreshButtonLabel();
 </script>
 
 </body>
