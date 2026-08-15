@@ -2,357 +2,469 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">l
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>St Barth Gorilla Fund — Item Registry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #2d5a27;
-      --primary-hover: #1e3d1a;
-      --accent: #d94b72;
-      --bg: #fdf8f5;
-      --border: #e0d0c0;
-      --text: #333;
+      --primary-dark: #122219;
+      --accent-gold: #c5a059;
+      --accent-gold-hover: #b08d48;
+      --bg-cream: #f9f6f0;
+      --card-bg: #ffffff;
+      --border-color: #e5dfd5;
+      --text-dark: #222222;
+      --text-muted: #666666;
     }
-    
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f1ea;
+
+    * {
+      box-sizing: border-box;
       margin: 0;
-      padding: 20px;
-      color: var(--text);
+      padding: 0;
     }
-    
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      padding: 40px 20px;
+      line-height: 1.6;
+    }
+
     .donation-container {
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
-      padding: 30px;
-      background-color: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     }
-    
+
+    .brand-header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 25px;
+    }
+
+    .brand-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
     .donation-title {
-      text-align: center;
-      color: var(--primary);
-      margin-bottom: 5px;
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
     }
-    
-    .donation-subtitle {
-      text-align: center;
-      color: #666;
+
+    .donation-description {
       font-size: 14px;
-      margin-bottom: 25px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      font-weight: 300;
     }
-    
-    /* Tabs Header */
+
+    /* Tab Navigation */
     .tab-menu {
       display: flex;
       flex-wrap: wrap;
-      gap: 5px;
-      border-bottom: 2px solid var(--border);
-      margin-bottom: 20px;
+      gap: 8px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 15px;
+      justify-content: center;
     }
-    
+
     .tab-btn {
-      padding: 10px 15px;
-      background: none;
-      border: none;
-      border-bottom: 3px solid transparent;
-      font-weight: bold;
-      color: #666;
+      background: transparent;
+      border: 1px solid var(--border-color);
+      padding: 10px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dark);
       cursor: pointer;
-      font-size: 14px;
+      transition: all 0.3s ease;
+      border-radius: 2px;
     }
-    
+
+    .tab-btn:hover {
+      border-color: var(--accent-gold);
+      color: var(--accent-gold);
+    }
+
     .tab-btn.active {
-      color: var(--primary);
-      border-bottom-color: var(--primary);
+      background-color: var(--primary-dark);
+      color: #ffffff;
+      border-color: var(--primary-dark);
     }
-    
+
     .tab-content {
       display: none;
     }
-    
+
     .tab-content.active {
       display: block;
     }
-    
+
     .section-title {
-      font-size: 16px;
-      font-weight: bold;
-      color: var(--primary);
-      margin-top: 15px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid var(--border);
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: var(--primary-dark);
+      margin-bottom: 15px;
       padding-bottom: 5px;
+      border-bottom: 1px solid var(--border-color);
     }
-    
+
+    /* List Items */
     .donation-item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px dashed #dcd3ca;
+      padding: 14px 10px;
+      border-bottom: 1px solid #f2eee9;
+      transition: background 0.2s ease;
     }
-    
+
+    .donation-item:hover {
+      background-color: #faf8f5;
+    }
+
+    .donation-item input[type="checkbox"] {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--accent-gold);
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      margin-right: 15px;
+      flex-shrink: 0;
+    }
+
+    .donation-item input[type="checkbox"]:checked {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .donation-item input[type="checkbox"]:checked::after {
+      content: '✓';
+      position: absolute;
+      color: white;
+      font-size: 12px;
+      top: -1px;
+      left: 3px;
+    }
+
     .donation-item label {
-      flex-grow: 1;
-      margin-left: 10px;
       font-size: 14px;
+      color: var(--text-dark);
+      cursor: pointer;
+      flex-grow: 1;
     }
-    
-    .total-section {
-      margin-top: 25px;
-      padding-top: 15px;
-      border-top: 2px solid var(--primary);
+
+    /* Summary & Actions */
+    .summary-card {
+      margin-top: 35px;
+      background-color: var(--primary-dark);
+      color: #ffffff;
+      padding: 25px;
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .summary-row {
       display: flex;
       justify-content: space-between;
-      font-size: 18px;
-      font-weight: bold;
+      align-items: center;
     }
-    
+
+    .summary-label {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      letter-spacing: 1px;
+      color: var(--accent-gold);
+    }
+
+    .total-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
     .currency-breakdown {
       font-size: 13px;
-      color: #666;
+      color: #bbbbbb;
       text-align: right;
-      margin-top: 5px;
     }
-    
+
     .donate-btn {
       width: 100%;
-      margin-top: 20px;
-      padding: 14px;
-      background-color: var(--accent);
-      color: white;
+      background-color: var(--accent-gold);
+      color: #ffffff;
       border: none;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
+      padding: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
       cursor: pointer;
+      transition: background 0.3s ease;
+      border-radius: 2px;
+      margin-top: 10px;
     }
-    
+
     .donate-btn:hover {
-      background-color: #c23b60;
+      background-color: var(--accent-gold-hover);
+    }
+
+    @media (max-width: 600px) {
+      .donation-container {
+        padding: 20px;
+      }
+      .tab-btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
 <div class="donation-container">
-  <h2 class="donation-title">St Barth Gorilla Fund</h2>
-  <p class="donation-subtitle">Select specific structural, educational, or operating items to support our partner programs.</p>
+  <div class="brand-header">
+    <p class="brand-subtitle">St. Barth Gorilla Expeditions</p>
+    <h1 class="donation-title">St. Barth Gorilla Fund</h1>
+    <p class="donation-description">Select specific operational, educational, or infrastructure items below to direct your contribution to local partner initiatives.</p>
+  </div>
 
   <!-- Navigation Tabs -->
   <div class="tab-menu">
-    <button class="tab-btn active" onclick="openTab(event, 'gifted')">Gifted Child School (USD)</button>
-    <button class="tab-btn" onclick="openTab(event, 'admin')">Rushaga: Admin Block (UGX)</button>
-    <button class="tab-btn" onclick="openTab(event, 'dining')">Rushaga: Dining Hall (UGX)</button>
-    <button class="tab-btn" onclick="openTab(event, 'dorm')">Rushaga: Boys Dormitory (UGX)</button>
-    <button class="tab-btn" onclick="openTab(event, 'teachers')">Rushaga: Teacher's House (UGX)</button>
-    <button class="tab-btn" onclick="openTab(event, 'salaries')">Rushaga: Operating & Salaries (UGX)</button>
+    <button class="tab-btn active" onclick="openTab(event, 'gifted')">Gifted Child School</button>
+    <button class="tab-btn" onclick="openTab(event, 'admin')">Rushaga: Admin Block</button>
+    <button class="tab-btn" onclick="openTab(event, 'dining')">Rushaga: Dining Hall</button>
+    <button class="tab-btn" onclick="openTab(event, 'dorm')">Rushaga: Boys Dormitory</button>
+    <button class="tab-btn" onclick="openTab(event, 'teachers')">Rushaga: Teacher's House</button>
+    <button class="tab-btn" onclick="openTab(event, 'salaries')">Rushaga: Operating & Salaries</button>
   </div>
 
   <form id="donationForm">
     
     <!-- Gifted Child Foundation Primary School (USD) -->
     <div id="gifted" class="tab-content active">
-      <div class="section-title">Gifted Child Foundation Primary School[cite: 2]</div>
+      <div class="section-title">Gifted Child Foundation Primary School (USD)</div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2200" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>1 Month Staff Salary (16 staff) — $2,200[cite: 2]</label>
+        <input type="checkbox" id="g1" data-cost="2200" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g1">1 Month Staff Salary (16 staff) — $2,200</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>1 Month Lunch & Dinner (120 pupils) — $2,000[cite: 2]</label>
+        <input type="checkbox" id="g2" data-cost="2000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g2">1 Month Lunch & Dinner (120 pupils) — $2,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="600" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>1 Month Breakfast (120 pupils) — $600[cite: 2]</label>
+        <input type="checkbox" id="g3" data-cost="600" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g3">1 Month Breakfast (120 pupils) — $600</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="8500" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>Completing 2 Classrooms — $8,500[cite: 2]</label>
+        <input type="checkbox" id="g4" data-cost="8500" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g4">Completing 2 Classrooms — $8,500</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="23000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>Construction of Boys Dormitory — $23,000[cite: 2]</label>
+        <input type="checkbox" id="g5" data-cost="23000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g5">Construction of Boys Dormitory — $23,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="3000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>20KW 3-Phase Solar Power System — $3,000[cite: 2]</label>
+        <input type="checkbox" id="g6" data-cost="3000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g6">20KW 3-Phase Solar Power System — $3,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="20000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>School Van — $20,000[cite: 2]</label>
+        <input type="checkbox" id="g7" data-cost="20000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g7">School Van — $20,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="600" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>Text Books — $600[cite: 2]</label>
+        <input type="checkbox" id="g8" data-cost="600" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g8">Text Books — $600</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="5700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>Construction of 5-Stance Latrine — $5,700[cite: 2]</label>
+        <input type="checkbox" id="g9" data-cost="5700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g9">Construction of 5-Stance Latrine — $5,700</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="1700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>School Shoes — $1,700[cite: 2]</label>
+        <input type="checkbox" id="g10" data-cost="1700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g10">School Shoes — $1,700</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="1700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>School Sweaters (120 pupils) — $1,700[cite: 2]</label>
+        <input type="checkbox" id="g11" data-cost="1700" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g11">School Sweaters (120 pupils) — $1,700</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="1370" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>School Uniforms (120 pupils) — $1,370[cite: 2]</label>
+        <input type="checkbox" id="g12" data-cost="1370" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g12">School Uniforms (120 pupils) — $1,370</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="10000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
-        <label>Perimeter Wall Construction — $10,000[cite: 2]</label>
+        <input type="checkbox" id="g13" data-cost="10000" data-currency="USD" class="item-calc" onchange="calculateTotal()">
+        <label for="g13">Perimeter Wall Construction — $10,000</label>
       </div>
     </div>
 
     <!-- Rushaga Administration Block (UGX) -->
     <div id="admin" class="tab-content">
-      <div class="section-title">Rushaga Administration Block Construction[cite: 2]</div>
+      <div class="section-title">Rushaga Administration Block Construction (UGX)</div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="9000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Cement (200 bags) — UGX 9,000,000[cite: 2]</label>
+        <input type="checkbox" id="a1" data-cost="9000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="a1">Cement (200 bags) — UGX 9,000,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2250000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Bricks (4,500 truck) — UGX 2,250,000[cite: 2]</label>
+        <input type="checkbox" id="a2" data-cost="2250000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="a2">Bricks (4,500 truck) — UGX 2,250,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="3200000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Aggregate (8 trucks) — UGX 3,200,000[cite: 2]</label>
+        <input type="checkbox" id="a3" data-cost="3200000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="a3">Aggregate (8 trucks) — UGX 3,200,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="15000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Sand (50 trucks) — UGX 15,000,000[cite: 2]</label>
+        <input type="checkbox" id="a4" data-cost="15000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="a4">Sand (50 trucks) — UGX 15,000,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Hardcore Stones (12 trucks) — UGX 2,600,000[cite: 2]</label>
+        <input type="checkbox" id="a5" data-cost="2600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="a5">Hardcore Stones (12 trucks) — UGX 2,600,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="12600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Mason Labour (90 days) — UGX 12,600,000[cite: 2]</label>
+        <input type="checkbox" id="a6" data-cost="12600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="a6">Mason Labour (90 days) — UGX 12,600,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="9000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Porters Labour (8 porters / 90 days) — UGX 9,000,000[cite: 2]</label>
+        <input type="checkbox" id="a7" data-cost="9000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="a7">Porters Labour (8 porters / 90 days) — UGX 9,000,000</label>
       </div>
     </div>
 
     <!-- Rushaga Dining Hall (UGX) -->
     <div id="dining" class="tab-content">
-      <div class="section-title">Rushaga Main Hall / Dining[cite: 2]</div>
+      <div class="section-title">Rushaga Main Hall / Dining (UGX)</div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="4500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Cement (100 bags) — UGX 4,500,000[cite: 2]</label>
+        <input type="checkbox" id="d1" data-cost="4500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="d1">Cement (100 bags) — UGX 4,500,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="4800000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Sand (15 trucks) — UGX 4,800,000[cite: 2]</label>
+        <input type="checkbox" id="d2" data-cost="4800000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="d2">Sand (15 trucks) — UGX 4,800,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2700000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Stones (9 trucks) — UGX 2,700,000[cite: 2]</label>
+        <input type="checkbox" id="d3" data-cost="2700000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="d3">Stones (9 trucks) — UGX 2,700,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Bricks (5,000 pieces) — UGX 2,500,000[cite: 2]</label>
+        <input type="checkbox" id="d4" data-cost="2500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="d4">Bricks (5,000 pieces) — UGX 2,500,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Doors (5 doors) — UGX 2,000,000[cite: 2]</label>
+        <input type="checkbox" id="d5" data-cost="2000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="d5">Doors (5 doors) — UGX 2,000,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="1500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Windows (5 windows) — UGX 1,500,000[cite: 2]</label>
+        <input type="checkbox" id="d6" data-cost="1500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="d6">Windows (5 windows) — UGX 1,500,000</label>
       </div>
     </div>
 
     <!-- Rushaga Boys Dormitory (UGX) -->
     <div id="dorm" class="tab-content">
-      <div class="section-title">Rushaga Boys Dormitory Building & Plumbing[cite: 2]</div>
+      <div class="section-title">Rushaga Boys Dormitory Building & Plumbing (UGX)</div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="6750000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Cement (150 bags) — UGX 6,750,000[cite: 2]</label>
+        <input type="checkbox" id="dm1" data-cost="6750000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="dm1">Cement (150 bags) — UGX 6,750,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="7200000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Sand (24 trucks) — UGX 7,200,000[cite: 2]</label>
+        <input type="checkbox" id="dm2" data-cost="7200000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="dm2">Sand (24 trucks) — UGX 7,200,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="5600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Doors (8 doors) — UGX 5,600,000[cite: 2]</label>
+        <input type="checkbox" id="dm3" data-cost="5600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="dm3">Doors (8 doors) — UGX 5,600,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="10000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Construction Labour — UGX 10,000,000[cite: 2]</label>
+        <input type="checkbox" id="dm4" data-cost="10000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="dm4">Construction Labour — UGX 10,000,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="2000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Transport Costs — UGX 2,000,000[cite: 2]</label>
+        <input type="checkbox" id="dm5" data-cost="2000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="dm5">Transport Costs — UGX 2,000,000</label>
       </div>
     </div>
 
     <!-- Rushaga Teacher's House (UGX) -->
     <div id="teachers" class="tab-content">
-      <div class="section-title">Rushaga Teacher's House Construction[cite: 2]</div>
+      <div class="section-title">Rushaga Teacher's House Construction (UGX)</div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="1350000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Cement (300 bags) — UGX 1,350,000[cite: 2]</label>
+        <input type="checkbox" id="t1" data-cost="1350000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="t1">Cement (300 bags) — UGX 1,350,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="4500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Bricks (150,000) — UGX 4,500,000[cite: 2]</label>
+        <input type="checkbox" id="t2" data-cost="4500000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="t2">Bricks (150,000) — UGX 4,500,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="5600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Iron Sheets (80 sheets) — UGX 5,600,000[cite: 2]</label>
+        <input type="checkbox" id="t3" data-cost="5600000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="t3">Iron Sheets (80 sheets) — UGX 5,600,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="14875000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Mason Labour (85 days) — UGX 14,875,000[cite: 2]</label>
+        <input type="checkbox" id="t4" data-cost="14875000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="t4">Mason Labour (85 days) — UGX 14,875,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="8000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Porters Labour (80 days) — UGX 8,000,000[cite: 2]</label>
+        <input type="checkbox" id="t5" data-cost="8000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="t5">Porters Labour (80 days) — UGX 8,000,000</label>
       </div>
     </div>
 
     <!-- Rushaga Salaries & Operating Costs (UGX) -->
     <div id="salaries" class="tab-content">
-      <div class="section-title">Rushaga Operational & Staff Costs[cite: 2]</div>
+      <div class="section-title">Rushaga Operational & Staff Costs (UGX)</div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="5000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>1 Month Staff Salary (20 staff members) — UGX 5,000,000[cite: 2]</label>
+        <input type="checkbox" id="s1" data-cost="5000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="s1">1 Month Staff Salary (20 staff members) — UGX 5,000,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="15000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>1 Term Staff Salary (3 months) — UGX 15,000,000[cite: 2]</label>
+        <input type="checkbox" id="s2" data-cost="15000000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="s2">1 Term Staff Salary (3 months) — UGX 15,000,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="301000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Full Term Boarding Child Support (Incl. meals/supplies) — UGX 301,000[cite: 2]</label>
+        <input type="checkbox" id="s3" data-cost="301000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="s3">Full Term Boarding Child Support (Incl. meals/supplies) — UGX 301,000</label>
       </div>
       <div class="donation-item">
-        <input type="checkbox" data-cost="180000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
-        <label>Full Term Day Scholar Child Support — UGX 180,000[cite: 2]</label>
+        <input type="checkbox" id="s4" data-cost="180000" data-currency="UGX" class="item-calc" onchange="calculateTotal()">
+        <label for="s4">Full Term Day Scholar Child Support — UGX 180,000</label>
       </div>
     </div>
 
-    <!-- Total Display -->
-    <div class="total-section">
-      <span>Total Selected:</span>
-      <span id="totalUSD">$0 USD</span>
+    <!-- Summary Card -->
+    <div class="summary-card">
+      <div class="summary-row">
+        <span class="summary-label">Selected Total</span>
+        <span class="total-amount" id="totalUSD">$0 USD</span>
+      </div>
+      <div class="currency-breakdown" id="totalUGX">Plus: UGX 0</div>
+      <button type="button" class="donate-btn">Proceed to Contribution</button>
     </div>
-    <div class="currency-breakdown" id="totalUGX">UGX 0</div>
 
-    <button type="button" class="donate-btn">Proceed to Donate</button>
   </form>
 </div>
 
