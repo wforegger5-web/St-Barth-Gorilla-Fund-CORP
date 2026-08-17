@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Saint Barth Gorilla Fund — Conservation & Community Trust</title>
 <meta name="description" content="The philanthropic trust of Saint Barth Gorilla Expeditions, directing a share of every journey to conservation and community partners in Uganda, Rwanda, and Tanzania." />
+<link rel="icon" href="assets/logos/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="assets/logos/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="assets/logos/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -99,8 +102,12 @@
   }
   nav.wrap{display:flex; align-items:center; justify-content:space-between;}
   .brand{
-    display:flex; flex-direction:column; line-height:1;
+    display:flex; align-items:center; gap:12px;
   }
+  .brand-mark{
+    height:38px; width:auto; display:block; flex-shrink:0;
+  }
+  .brand-text{display:flex; flex-direction:column; line-height:1;}
   .brand .name{
     font-family:var(--serif); font-size:22px; letter-spacing:0.04em; color:var(--ivory);
   }
@@ -170,6 +177,26 @@
   }
   .pillar h3{font-size:24px; margin-bottom:14px; font-weight:500;}
   .pillar p{font-size:14.5px;}
+
+  /* ---------- COUNTRIES (Journeys-style block) ---------- */
+  #countries h2{margin-bottom:56px;}
+  .journeys-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:56px;
+  }
+  .journey-col{
+    border-top:1px solid var(--line-strong); padding-top:28px;
+  }
+  .journey-label{
+    font-family:var(--sans); font-size:10.5px; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold);
+    display:block; margin-bottom:16px;
+  }
+  .journey-col h3{font-size:23px; line-height:1.3; margin-bottom:14px; font-weight:500;}
+  .journey-col p{font-size:14.5px; margin-bottom:20px;}
+  .journey-link{
+    font-family:var(--sans); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold-light);
+    border-bottom:1px solid transparent; padding-bottom:3px; transition:border-color .25s;
+  }
+  .journey-link:hover{border-color:var(--gold-light);}
 
   /* ---------- PARTNERS ---------- */
   .country-block{margin-bottom:88px;}
@@ -245,6 +272,13 @@
   .registry-bar .rb-count{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--ivory-dim);}
   .registry-bar .rb-total{font-family:var(--serif); font-size:28px; color:var(--gold-light); margin-top:4px;}
 
+  .sector-list{max-height:260px; overflow-y:auto; margin:2px 0 18px; padding-right:8px;}
+  .sector-row{display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-top:1px solid var(--line); font-size:13px; color:var(--ivory-dim);}
+  .sector-row:first-child{border-top:none;}
+  .sector-row span:last-child{color:var(--ivory); font-family:var(--serif); font-size:14px; white-space:nowrap;}
+  .sector-note{font-size:11.5px; color:var(--ivory-dim); margin-top:2px; margin-bottom:18px; line-height:1.6;}
+  .sector-fund-row{border-top:1px solid var(--line-strong); margin-top:4px; padding-top:16px;}
+
   /* ---------- GET INVOLVED ---------- */
   .involved-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:1px; background:var(--line); border:1px solid var(--line);}
   .involved-panel{background:var(--black); padding:48px 44px;}
@@ -313,6 +347,7 @@
 
   footer{border-top:1px solid var(--line); padding:56px 0 32px;}
   .footer-top{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:36px; margin-bottom:44px;}
+  .footer-mark{width:52px; height:auto; margin-bottom:16px; display:block;}
   .footer-brand .name{font-family:var(--serif); font-size:24px;}
   .footer-brand .sub{font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-top:8px;}
   .footer-cols{display:flex; gap:70px; flex-wrap:wrap;}
@@ -337,6 +372,7 @@
     .navlinks a{font-size:13px;}
     .burger{display:flex;}
     .mission-grid{grid-template-columns:1fr; gap:40px;}
+    .journeys-grid{grid-template-columns:1fr; gap:36px;}
     .pillars{grid-template-columns:1fr;}
     .partner-grid{grid-template-columns:1fr;}
     .involved-grid{grid-template-columns:1fr;}
@@ -353,8 +389,11 @@
 <header id="siteHeader">
   <nav class="wrap">
     <a href="#top" class="brand">
-      <span class="name">Saint Barth Gorilla Fund</span>
-      <span class="sub">Conservation &amp; Community Trust</span>
+      <img src="assets/logos/logo_gorilla_ivory.png" alt="" class="brand-mark">
+      <span class="brand-text">
+        <span class="name">Saint Barth Gorilla Fund</span>
+        <span class="sub">Conservation &amp; Community Trust</span>
+      </span>
     </a>
     <div class="navlinks" id="navLinks">
       <a href="#mission">Our Purpose</a>
@@ -423,6 +462,36 @@
 
 <div class="divider"></div>
 
+<section id="countries">
+  <div class="wrap">
+    <span class="eyebrow">Where We Give</span>
+    <h2>Uganda, Tanzania, Rwanda</h2>
+
+    <div class="journeys-grid">
+      <div class="journey-col reveal">
+        <span class="journey-label">Uganda</span>
+        <h3>Bwindi &amp; the Community Beyond the Trailhead</h3>
+        <p>Schools, staff housing, and veterinary care for the gorillas guests travel to see.</p>
+        <a href="#partners-uganda" class="journey-link">See Uganda Partners →</a>
+      </div>
+      <div class="journey-col reveal">
+        <span class="journey-label">Tanzania</span>
+        <h3>The Serengeti &amp; the Villages Along Its Edge</h3>
+        <p>Conservation research, ranger operations, and a school built from an orphanage in Loliondo.</p>
+        <a href="#partners-tanzania" class="journey-link">See Tanzania Partners →</a>
+      </div>
+      <div class="journey-col reveal">
+        <span class="journey-label">Rwanda</span>
+        <h3>The Virunga Range &amp; Its Neighboring Communities</h3>
+        <p>Gorilla research, women's cooperatives, and schools in the shadow of the volcanoes.</p>
+        <a href="#partners-rwanda" class="journey-link">See Rwanda Partners →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <section id="partners">
   <div class="wrap">
     <div class="section-head reveal">
@@ -430,14 +499,38 @@
       <h2>Where the giving goes</h2>
     </div>
 
-    <div class="country-block reveal">
+<div class="country-block reveal" id="partners-uganda">
+      <div class="country-head"><h3>Uganda</h3><span>Bwindi Impenetrable Forest</span></div>
+      <div class="partner-grid">
+        <div class="partner-card">
+          <span class="cat">Education</span>
+          <h4>Rushaga Community Primary School</h4>
+          <p>Serving the community bordering Bwindi's Rushaga trailhead, with active needs across classrooms, a boys' dormitory, staff housing, and daily operations.</p>
+          <div class="link">Kisoro, Uganda</div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Education</span>
+          <h4>Gifted Child Foundation Primary School</h4>
+          <p>A school for gifted children supporting 120 pupils, with needs spanning staff salaries, meals, classroom completion, and dormitory construction.</p>
+          <div class="link">Uganda</div>
+        </div>
+        <div class="partner-card">
+          <span class="cat">Veterinary Care</span>
+          <h4>Gorilla Doctors</h4>
+          <p>Field veterinarians providing direct, hands-on care to wild mountain and Grauer's gorillas across the Bwindi and Virunga ecosystems.</p>
+          <div class="link"><a href="https://gorilladoctors.org/guardians-of-gorilla-health-team-uganda/" target="_blank" rel="noopener">gorilladoctors.org</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="country-block reveal" id="partners-tanzania">
       <div class="country-head"><h3>Tanzania</h3><span>Northern Serengeti &amp; Loliondo</span></div>
       <div class="partner-grid">
         <div class="partner-card">
           <span class="cat">Community &amp; Conservation</span>
           <h4>Serengeti Preservation Foundation</h4>
           <p>Based in Loliondo, working directly with Maasai communities on women's entrepreneurship, conservation education, sustainable agriculture, and school programs.</p>
-          <div class="link">Loliondo, Tanzania</div>
+          <div class="link"><a href="https://serengetipf.org/" target="_blank" rel="noopener">serengetipf.org</a></div>
         </div>
         <div class="partner-card">
           <span class="cat">Wildlife Conservation</span>
@@ -460,7 +553,7 @@
       </div>
     </div>
 
-    <div class="country-block reveal">
+    <div class="country-block reveal" id="partners-rwanda">
       <div class="country-head"><h3>Rwanda</h3><span>Volcanoes National Park &amp; the Virunga Range</span></div>
       <div class="partner-grid">
         <div class="partner-card">
@@ -479,37 +572,13 @@
           <span class="cat">Community &amp; Health</span>
           <h4>Kwizera Charity Foundation</h4>
           <p>A Kigali-based nonprofit supporting vulnerable children through education, nutrition, healthcare, counseling, and annual medical outreach for underserved families.</p>
-          <div class="link">Kigali, Rwanda</div>
+          <div class="link"><a href="https://kwizeracharityfoundation.org/" target="_blank" rel="noopener">kwizeracharityfoundation.org</a></div>
         </div>
         <div class="partner-card">
           <span class="cat">Education</span>
           <h4>Nyabihu School for the Deaf</h4>
           <p>Provides education, Rwandan Sign Language, and vocational training for deaf children in western Rwanda, many from families with limited access to specialized education.</p>
           <div class="link"><a href="https://nsd.rw/" target="_blank" rel="noopener">nsd.rw</a></div>
-        </div>
-        <div class="partner-card">
-          <span class="cat">Veterinary Care</span>
-          <h4>Gorilla Doctors</h4>
-          <p>Field veterinarians providing direct, hands-on care to wild mountain and Grauer's gorillas across the Virunga and Bwindi ecosystems.</p>
-          <div class="link">Ruhengeri, Rwanda</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="country-block reveal">
-      <div class="country-head"><h3>Uganda</h3><span>Bwindi Impenetrable Forest</span></div>
-      <div class="partner-grid">
-        <div class="partner-card">
-          <span class="cat">Education</span>
-          <h4>Rushaga Community Primary School</h4>
-          <p>Serving the community bordering Bwindi's Rushaga trailhead, with active needs across classrooms, a boys' dormitory, staff housing, and daily operations.</p>
-          <div class="link">Kisoro, Uganda</div>
-        </div>
-        <div class="partner-card">
-          <span class="cat">Education</span>
-          <h4>Gifted Child Foundation Primary School</h4>
-          <p>A school for gifted children supporting 120 pupils, with needs spanning staff salaries, meals, classroom completion, and dormitory construction.</p>
-          <div class="link">Uganda</div>
         </div>
       </div>
     </div>
@@ -553,7 +622,142 @@
 
       <details class="registry-group">
         <summary>
-          <div><div class="g-title">Rushaga Community Primary School — Dormitory Foundation</div><div class="g-sub">Uganda — Education</div></div>
+          <div><div class="g-title">Rushaga Community Primary School</div><div class="g-sub">Uganda — Education &amp; Infrastructure</div></div>
+          <span class="g-chevron">Show Items</span>
+        </summary>
+        <div class="registry-items">
+          <div class="field">
+            <label for="rushagaSector">View Sector</label>
+            <select id="rushagaSector">
+              <option value="admin">Administration Block</option>
+              <option value="boys">Boys' Dormitory</option>
+              <option value="dining">Dining Hall</option>
+              <option value="teach">Teachers' House</option>
+              <option value="ops">Staff Salaries &amp; School Fees</option>
+            </select>
+          </div>
+          <p class="sector-note">Amounts are converted from the school's original quotations in Ugandan Shillings at an approximate rate of $1 = 3,700 UGX. Individual line items are listed exactly as quoted by the school; small rounding differences from the official quoted total reflect the original document.</p>
+
+          <div class="sector-panel" data-sector="admin">
+            <div class="sector-list">
+              <div class="sector-row"><span>Cement — 200 Bags</span><span>$2,432</span></div>
+              <div class="sector-row"><span>Bricks — 4,500</span><span>$608</span></div>
+              <div class="sector-row"><span>Aggregate — 8 Trucks</span><span>$865</span></div>
+              <div class="sector-row"><span>Sand — 50 Trucks</span><span>$4,054</span></div>
+              <div class="sector-row"><span>Hardcore Stones — 12 Trucks</span><span>$703</span></div>
+              <div class="sector-row"><span>Iron Bars — 30 Lengths</span><span>$324</span></div>
+              <div class="sector-row"><span>Expanded Mesh — 25 Rolls</span><span>$291</span></div>
+              <div class="sector-row"><span>Off-Cuts — 50 Pieces</span><span>$68</span></div>
+              <div class="sector-row"><span>Varnish — 15 Tins</span><span>$243</span></div>
+              <div class="sector-row"><span>Paint — 20 Jerrycans</span><span>$541</span></div>
+              <div class="sector-row"><span>Weatherguard — 15 Buckets</span><span>$1,622</span></div>
+              <div class="sector-row"><span>Oil — 4 Jerrycans</span><span>$65</span></div>
+              <div class="sector-row"><span>Filler — 50kg</span><span>$68</span></div>
+              <div class="sector-row"><span>Oxide — 20kg</span><span>$81</span></div>
+              <div class="sector-row"><span>Mason Labour — 90 Days</span><span>$3,405</span></div>
+              <div class="sector-row"><span>Porter Labour — 90 Days</span><span>$2,432</span></div>
+              <div class="sector-row"><span>Nails, 4-inch — 10kg</span><span>$22</span></div>
+              <div class="sector-row"><span>Nails, 2.5-inch — 5kg</span><span>$14</span></div>
+            </div>
+            <div class="reg-row sector-fund-row"><input type="checkbox" id="rA" data-name="Fund the Administration Block" data-amt="15647"><label for="rA"><span class="ri-name">Fund the Entire Administration Block</span><span class="ri-amt">$15,647</span></label></div>
+          </div>
+
+          <div class="sector-panel" data-sector="boys" style="display:none;">
+            <div class="sector-list">
+              <div class="sector-row"><span>Cement — 150 Bags</span><span>$1,824</span></div>
+              <div class="sector-row"><span>Sand — 24 Truckloads</span><span>$1,946</span></div>
+              <div class="sector-row"><span>Stones — 19 Truckloads</span><span>$1,541</span></div>
+              <div class="sector-row"><span>Aggregate — 11 Truckloads</span><span>$892</span></div>
+              <div class="sector-row"><span>Bricks — 6,000</span><span>$811</span></div>
+              <div class="sector-row"><span>Doors — 8</span><span>$1,514</span></div>
+              <div class="sector-row"><span>Varnish — 4 Tins</span><span>$86</span></div>
+              <div class="sector-row"><span>Undercoat — 8 Jerrycans</span><span>$259</span></div>
+              <div class="sector-row"><span>Weatherguard — 5 Buckets</span><span>$405</span></div>
+              <div class="sector-row"><span>Windows — 5</span><span>$405</span></div>
+              <div class="sector-row"><span>Toilet Sets — 2</span><span>$135</span></div>
+              <div class="sector-row"><span>Pressure Pipe — 12</span><span>$114</span></div>
+              <div class="sector-row"><span>Pressure Elbow — 15</span><span>$41</span></div>
+              <div class="sector-row"><span>Galvanized Pipe — 15</span><span>$32</span></div>
+              <div class="sector-row"><span>PPR Showers — 10</span><span>$81</span></div>
+              <div class="sector-row"><span>PVC Cement — 10</span><span>$27</span></div>
+              <div class="sector-row"><span>Vent Cup — 6</span><span>$16</span></div>
+              <div class="sector-row"><span>Pipe Clips — 10</span><span>$14</span></div>
+              <div class="sector-row"><span>PPR Plugs — 10</span><span>$11</span></div>
+              <div class="sector-row"><span>PVC Pipe — 5</span><span>$41</span></div>
+              <div class="sector-row"><span>Floor Trap — 10</span><span>$54</span></div>
+              <div class="sector-row"><span>Transport</span><span>$541</span></div>
+              <div class="sector-row"><span>Labour</span><span>$2,703</span></div>
+            </div>
+            <div class="reg-row sector-fund-row"><input type="checkbox" id="rB" data-name="Fund the Boys' Dormitory" data-amt="13492"><label for="rB"><span class="ri-name">Fund the Entire Boys' Dormitory</span><span class="ri-amt">$13,492</span></label></div>
+          </div>
+
+          <div class="sector-panel" data-sector="dining" style="display:none;">
+            <div class="sector-list">
+              <div class="sector-row"><span>Cement — 100 Bags</span><span>$1,216</span></div>
+              <div class="sector-row"><span>Sand — 15 Trucks</span><span>$1,297</span></div>
+              <div class="sector-row"><span>Stones — 9 Trucks</span><span>$730</span></div>
+              <div class="sector-row"><span>Aggregates — 5 Trucks</span><span>$541</span></div>
+              <div class="sector-row"><span>Bricks — 5,000</span><span>$676</span></div>
+              <div class="sector-row"><span>Oxide — 1 Sack</span><span>$41</span></div>
+              <div class="sector-row"><span>Doors — 5</span><span>$541</span></div>
+              <div class="sector-row"><span>Windows — 5</span><span>$405</span></div>
+              <div class="sector-row"><span>Mason Labour — 4 Masons, 15 Days</span><span>$946</span></div>
+              <div class="sector-row"><span>Porter Labour — 8 Porters, 15 Days</span><span>$1,081</span></div>
+              <div class="sector-row"><span>Transport</span><span>$270</span></div>
+            </div>
+            <div class="reg-row sector-fund-row"><input type="checkbox" id="rC" data-name="Fund the Dining Hall" data-amt="7743"><label for="rC"><span class="ri-name">Fund the Entire Dining Hall</span><span class="ri-amt">$7,743</span></label></div>
+          </div>
+
+          <div class="sector-panel" data-sector="teach" style="display:none;">
+            <div class="sector-list">
+              <div class="sector-row"><span>Cement — 300 Bags</span><span>$365</span></div>
+              <div class="sector-row"><span>Bricks — 150,000</span><span>$1,216</span></div>
+              <div class="sector-row"><span>Sand — 30 Trucks</span><span>$2,432</span></div>
+              <div class="sector-row"><span>Hardcore Stones — 15 Trucks</span><span>$1,216</span></div>
+              <div class="sector-row"><span>Aggregates — 10 Trucks</span><span>$1,081</span></div>
+              <div class="sector-row"><span>Iron Sheets (Roofing) — 80</span><span>$1,514</span></div>
+              <div class="sector-row"><span>Timber, 6×2 — 200 Pieces</span><span>$541</span></div>
+              <div class="sector-row"><span>Timber, 4×2 — 200 Pieces</span><span>$432</span></div>
+              <div class="sector-row"><span>Nails, 6-inch — 30kg</span><span>$49</span></div>
+              <div class="sector-row"><span>Nails, 5-inch — 25kg</span><span>$41</span></div>
+              <div class="sector-row"><span>Windows — 7</span><span>$946</span></div>
+              <div class="sector-row"><span>Varnish — 8</span><span>$130</span></div>
+              <div class="sector-row"><span>Paint Undercoat — 10 Jerrycans</span><span>$270</span></div>
+              <div class="sector-row"><span>Weatherguard — 5 Buckets</span><span>$541</span></div>
+              <div class="sector-row"><span>Pian — 3 Rolls</span><span>$24</span></div>
+              <div class="sector-row"><span>Oil — 2 Jerrycans</span><span>$32</span></div>
+              <div class="sector-row"><span>Oxide — 20kg</span><span>$108</span></div>
+              <div class="sector-row"><span>Filler — 25kg</span><span>$34</span></div>
+              <div class="sector-row"><span>Mason Labour — 85 Days</span><span>$4,020</span></div>
+              <div class="sector-row"><span>Porter Labour — 80 Days</span><span>$2,162</span></div>
+              <div class="sector-row"><span>Expanded Mesh — 32 Rolls</span><span>$432</span></div>
+            </div>
+            <div class="reg-row sector-fund-row"><input type="checkbox" id="rD" data-name="Fund the Teachers' House" data-amt="20870"><label for="rD"><span class="ri-name">Fund the Entire Teachers' House</span><span class="ri-amt">$20,870</span></label></div>
+          </div>
+
+          <div class="sector-panel" data-sector="ops" style="display:none;">
+            <p class="sector-note" style="margin-top:0;">Rushaga has 20 staff members and runs on a 3-month term. Boarding fees include 10kg of beans, 4 sanitary pads, and a broom per term; day-scholar fees include 6kg of beans, 4 sanitary pads, and a broom per term.</p>
+            <div class="reg-row"><input type="checkbox" id="rE1" data-name="1 Month of Staff Salaries (20 staff)" data-amt="1351"><label for="rE1"><span class="ri-name">1 Month of Staff Salaries (20 staff)</span><span class="ri-amt">$1,351</span></label></div>
+            <div class="reg-row"><input type="checkbox" id="rE2" data-name="1 Term of School Operations (3 months)" data-amt="4054"><label for="rE2"><span class="ri-name">1 Term of School Operations (3 months)</span><span class="ri-amt">$4,054</span></label></div>
+            <div class="reg-row"><input type="checkbox" id="rE3" data-name="Sponsor a Boarding Child for a Term" data-amt="81"><label for="rE3"><span class="ri-name">Sponsor a Boarding Child for a Term</span><span class="ri-amt">$81</span></label></div>
+            <div class="reg-row"><input type="checkbox" id="rE4" data-name="Sponsor a Day Scholar for a Term" data-amt="49"><label for="rE4"><span class="ri-name">Sponsor a Day Scholar for a Term</span><span class="ri-amt">$49</span></label></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="registry-group">
+        <summary>
+          <div><div class="g-title">General Support</div><div class="g-sub">Uganda — Choose Your Own Amount</div></div>
+          <span class="g-chevron">Show Items</span>
+        </summary>
+        <div class="registry-items">
+          <div class="reg-row"><input type="checkbox" id="rGD" data-name="General Support — Gorilla Doctors" data-amt="0" data-custom="true"><label for="rGD"><span class="ri-name">Gorilla Doctors (Uganda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="rGD" disabled></label></div>
+        </div>
+      </details>
+
+      <details class="registry-group">
+        <summary>
+          <div><div class="g-title">Bright English Medium School (BEMS)</div><div class="g-sub">Tanzania — Boys' Dormitory Foundation</div></div>
           <span class="g-chevron">Show Items</span>
         </summary>
         <div class="registry-items">
@@ -584,18 +788,25 @@
 
       <details class="registry-group">
         <summary>
-          <div><div class="g-title">General Support</div><div class="g-sub">All Other Field Partners — Choose Your Own Amount</div></div>
+          <div><div class="g-title">General Support</div><div class="g-sub">Tanzania — Choose Your Own Amount</div></div>
           <span class="g-chevron">Show Items</span>
         </summary>
         <div class="registry-items">
           <div class="reg-row"><input type="checkbox" id="i23" data-name="General Support — Serengeti Preservation Foundation" data-amt="0" data-custom="true"><label for="i23"><span class="ri-name">Serengeti Preservation Foundation (Tanzania)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i23" disabled></label></div>
           <div class="reg-row"><input type="checkbox" id="i24" data-name="General Support — TAWIRI" data-amt="0" data-custom="true"><label for="i24"><span class="ri-name">TAWIRI Serengeti Wildlife Research Centre (Tanzania)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i24" disabled></label></div>
-          <div class="reg-row"><input type="checkbox" id="i25" data-name="General Support — Bright English Medium School" data-amt="0" data-custom="true"><label for="i25"><span class="ri-name">Bright English Medium School (Tanzania)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i25" disabled></label></div>
+        </div>
+      </details>
+
+      <details class="registry-group">
+        <summary>
+          <div><div class="g-title">General Support</div><div class="g-sub">Rwanda — Choose Your Own Amount</div></div>
+          <span class="g-chevron">Show Items</span>
+        </summary>
+        <div class="registry-items">
           <div class="reg-row"><input type="checkbox" id="i26" data-name="General Support — Dian Fossey Gorilla Fund" data-amt="0" data-custom="true"><label for="i26"><span class="ri-name">Dian Fossey Gorilla Fund (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i26" disabled></label></div>
           <div class="reg-row"><input type="checkbox" id="i27" data-name="General Support — Kinigi Women Village" data-amt="0" data-custom="true"><label for="i27"><span class="ri-name">Kinigi Women Village (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i27" disabled></label></div>
           <div class="reg-row"><input type="checkbox" id="i28" data-name="General Support — Kwizera Charity Foundation" data-amt="0" data-custom="true"><label for="i28"><span class="ri-name">Kwizera Charity Foundation (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i28" disabled></label></div>
           <div class="reg-row"><input type="checkbox" id="i29" data-name="General Support — Nyabihu School for the Deaf" data-amt="0" data-custom="true"><label for="i29"><span class="ri-name">Nyabihu School for the Deaf (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i29" disabled></label></div>
-          <div class="reg-row"><input type="checkbox" id="i30" data-name="General Support — Gorilla Doctors" data-amt="0" data-custom="true"><label for="i30"><span class="ri-name">Gorilla Doctors (Rwanda)</span><input type="number" class="ri-custom" placeholder="$0" min="1" data-for="i30" disabled></label></div>
         </div>
       </details>
 
@@ -677,6 +888,9 @@
           <label for="designation">Designate To</label>
           <select id="designation">
             <option value="Area of Greatest Need">Area of Greatest Need</option>
+            <option value="Rushaga Community Primary School">Rushaga Community Primary School — Uganda</option>
+            <option value="Gifted Child Foundation Primary School">Gifted Child Foundation Primary School — Uganda</option>
+            <option value="Gorilla Doctors">Gorilla Doctors — Uganda</option>
             <option value="Serengeti Preservation Foundation">Serengeti Preservation Foundation — Tanzania</option>
             <option value="Frankfurt Zoological Society">Frankfurt Zoological Society — Tanzania</option>
             <option value="TAWIRI">TAWIRI Serengeti Wildlife Research Centre — Tanzania</option>
@@ -685,9 +899,6 @@
             <option value="Kinigi Women Village">Kinigi Women Village — Rwanda</option>
             <option value="Kwizera Charity Foundation">Kwizera Charity Foundation — Rwanda</option>
             <option value="Nyabihu School for the Deaf">Nyabihu School for the Deaf — Rwanda</option>
-            <option value="Gorilla Doctors">Gorilla Doctors — Rwanda</option>
-            <option value="Rushaga Community Primary School">Rushaga Community Primary School — Uganda</option>
-            <option value="Gifted Child Foundation Primary School">Gifted Child Foundation Primary School — Uganda</option>
           </select>
         </div>
 
@@ -718,9 +929,10 @@
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
+        <img src="assets/logos/logo_gorilla_ivory.png" alt="Saint Barth Gorilla Fund" class="footer-mark">
         <div class="name">Saint Barth Gorilla Fund</div>
         <div class="sub">Conservation &amp; Community Trust</div>
-        <p style="margin-top:14px; font-size:13px; max-width:260px;">Wellesley, Massachusetts — giving directed to conservation and community partners in Uganda, Rwanda, and Tanzania.</p>
+        <p style="margin-top:14px; font-size:13px; max-width:260px;">Wellesley, Massachusetts — giving directed to conservation and community partners in Uganda, Tanzania, and Rwanda.</p>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
@@ -962,6 +1174,16 @@
   document.querySelectorAll('.ri-custom').forEach(input => {
     input.addEventListener('input', recalcRegistry);
   });
+
+  // Rushaga sector dropdown — show only the selected sector's item list
+  const rushagaSector = document.getElementById('rushagaSector');
+  if (rushagaSector) {
+    rushagaSector.addEventListener('change', function(){
+      document.querySelectorAll('.sector-panel').forEach(panel => {
+        panel.style.display = (panel.dataset.sector === this.value) ? 'block' : 'none';
+      });
+    });
+  }
 
   recalcRegistry();
 </script>
