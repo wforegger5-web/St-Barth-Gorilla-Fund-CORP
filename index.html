@@ -902,7 +902,21 @@
           </select>
         </div>
 
-        <div id="paypal-button-donate"></div>
+        <div id="donate-button-container">
+<div id="donate-button"></div>
+<script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+<script>
+PayPal.Donation.Button({
+env:'production',
+hosted_button_id:'X2PBPS47SL9G4',
+image: {
+src:'https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif',
+alt:'Donate with PayPal button',
+title:'PayPal - The safer, easier way to pay online!',
+}
+}).render('#donate-button');
+</script>
+</div>
         <p class="donate-note" id="monthlyNote" style="display:none;">Monthly giving is set up individually right now — email <a href="mailto:fund@stbarthgorillafund.org" style="color:var(--gold-light);">fund@stbarthgorillafund.org</a> with your preferred amount and we'll set up recurring billing for you.</p>
         <p class="donate-note">Secured by PayPal — pay by PayPal balance, card, or Venmo. Saint Barth Gorilla Fund is a project of Saint Barth Gorilla Expeditions' philanthropic trust.</p>
       </div>
