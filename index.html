@@ -16,14 +16,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <!--
   PayPal JS SDK — Smart Payment Buttons
-  ---------------------------------------------------------------
-  client-id=AYzYufu8Atw4WOlpjCY7Gf-CmcICURvOGHZcFwm_99vP23WAxDbws7nRb5bfErbodnAK1auCeehhu8vy below is PayPal's public SANDBOX/DEMO id. Buttons
-  will render with it, but real money will NOT move until you swap
-  it for your own live Client ID from developer.paypal.com
-  (Apps & Credentials → your app → Client ID, "Live" tab, not "Sandbox").
-  Everything else (currency, funding sources) can stay as-is.
+  The client-id in the script tag below is the Fund's PayPal Client ID.
+  A Client ID is public by design. Never put the app's Secret key in this file.
+  To change accounts, replace the client-id value with the Client ID from the
+  Live tab of the app at developer.paypal.com (Apps & Credentials).
 -->
-<script src="https://www.paypal.com/sdk/js?client-id=AYzYufu8Atw4WOlpjCY7Gf-CmcICURvOGHZcFwm_99vP23WAxDbws7nRb5bfErbodnAK1auCeehhu8vy&currency=USD&components=buttons&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=BAAu9SUJIdRlyRQo4ujqSMfoY7oDWEtV5Mn25aMJdKWpfM3xeT4oKrY7T3_VLJT1ZWwlxKlKP20ZO3DRe8&currency=USD&components=buttons&enable-funding=venmo,paylater,card" data-sdk-integration-source="developer-studio"></script>
 <style>
   :root{
     --black:#0b0c0a;
@@ -1073,12 +1071,10 @@ title:'PayPal - The safer, easier way to pay online!',
      No backend required — this renders real PayPal / card / Venmo
      buttons and creates + captures the order entirely client-side.
 
-     TO GO LIVE:
-     1. In the <head>, find the PayPal SDK <script> tag and replace
-        client-id=test with your own LIVE client ID from
-        developer.paypal.com (Apps & Credentials → your app →
-        Client ID, "Live" tab).
-     2. That's it — both donation buttons below use that same SDK.
+     ACCOUNT: both donation buttons use the PayPal SDK tag in the <head>.
+     To change which PayPal account receives gifts, replace its client-id
+     with the Client ID from the Live tab of your app at
+     developer.paypal.com. Never paste the Secret key into this file.
 
      Note: client-side order creation is fine for a donations flow
      like this one, but PayPal recommends validating amounts
