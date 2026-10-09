@@ -423,6 +423,116 @@
     .field-grid figure{aspect-ratio:3/2;}
     .field-grid figure.lead{grid-column:auto; grid-row:auto; height:auto; aspect-ratio:4/5;}
   }
+
+  /* ---------- COMPACT MOBILE LAYOUT (less scrolling on phones) ---------- */
+  @media (max-width:900px){
+    .wrap{padding:0 20px;}
+    section{padding:44px 0;}
+    h2{font-size:26px; line-height:1.18;}
+    .eyebrow{margin-bottom:10px; font-size:10px; letter-spacing:0.26em;}
+    .section-head{margin-bottom:24px;}
+    .btn{padding:13px 22px; font-size:11px;}
+    header{padding:14px 0;}
+    .brand-mark{height:32px;}
+    .brand .name{font-size:18px;}
+
+    /* hero */
+    .hero{min-height:0;}
+    .hero-content{padding-top:92px; padding-bottom:36px;}
+    .hero .tag{font-size:15px; margin-bottom:12px;}
+    .hero h1{font-size:34px; line-height:1.1;}
+    .hero p.lead{font-size:14.5px; margin-top:14px; line-height:1.55;}
+    .hero-ctas{margin-top:22px; gap:10px;}
+    .hero-stats{margin-top:28px; grid-template-columns:repeat(3,1fr);}
+    .hero-stats div{padding:14px 10px;}
+    .hero-stats .num{font-size:22px;}
+    .hero-stats .label{font-size:8.5px; letter-spacing:0.1em; margin-top:5px; line-height:1.4;}
+
+    /* photos: one swipeable row instead of a tall stack */
+    .field-photos{padding:40px 0 44px;}
+    .field-photos .section-head{margin-bottom:18px;}
+    .field-grid{
+      display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch; scrollbar-width:none;
+      margin:0 -20px; padding:0 20px 2px;
+    }
+    .field-grid::-webkit-scrollbar{display:none;}
+    .field-grid figure, .field-grid figure.lead{
+      flex:0 0 74%; height:300px; aspect-ratio:auto; grid-column:auto; grid-row:auto; scroll-snap-align:center;
+    }
+    .field-grid figcaption{padding:30px 14px 12px; font-size:9.5px;}
+
+    /* purpose */
+    .mission-grid{gap:16px;}
+    .mission-grid p{font-size:14.5px; margin-bottom:12px; line-height:1.55;}
+    .pillars{margin-top:32px;}
+    .pillar{padding:22px 20px;}
+    .pillar .mark{margin-bottom:8px;}
+    .pillar h3{font-size:20px; margin-bottom:8px;}
+    .pillar p{font-size:13.5px; line-height:1.5;}
+
+    /* countries */
+    #countries h2{margin-bottom:22px;}
+    .journeys-grid{gap:20px;}
+    .journey-col{padding-top:16px;}
+    .journey-label{margin-bottom:8px;}
+    .journey-col h3{font-size:19px; margin-bottom:8px;}
+    .journey-col p{font-size:13.5px; margin-bottom:10px;}
+
+    /* partners */
+    .country-block{margin-bottom:34px;}
+    .country-head{margin-bottom:16px; padding-bottom:10px;}
+    .country-head h3{font-size:23px;}
+    .partner-card{min-height:0; padding:18px 18px 16px;}
+    .partner-card .cat{margin-bottom:6px;}
+    .partner-card h4{font-size:18px; margin-bottom:6px;}
+    .partner-card p{font-size:13px; line-height:1.5;}
+    .partner-card .link{margin-top:10px; padding-top:10px;}
+
+    /* registry */
+    .registry{margin-top:0;}
+    .registry-group summary{padding:16px 16px; gap:10px;}
+    .registry-group summary .g-title{font-size:17px; line-height:1.25;}
+    .registry-group summary .g-sub{font-size:9.5px; margin-top:3px;}
+    .registry-group summary .g-chevron{padding:6px 10px; font-size:10px;}
+    .registry-items{padding:0 16px 18px;}
+    .reg-row{padding:10px 0; gap:12px;}
+    .reg-row .ri-name, .reg-row .ri-amt{font-size:15px;}
+    .sector-list{max-height:200px;}
+    .registry-bar{padding:12px 16px;}
+    .registry-bar .rb-total{font-size:22px; margin-top:2px;}
+
+    /* donate */
+    .donate-wrap{gap:24px;}
+    .donate-copy h2{margin-bottom:12px;}
+    .donate-copy p{font-size:14.5px; margin-bottom:10px;}
+    .other-ways{margin-top:18px; padding-top:16px;}
+    .donate-form{padding:22px 18px;}
+    .toggle-row{margin-bottom:16px;}
+    .amounts{margin:14px 0 16px; gap:8px;}
+    .amt-btn{padding:11px 4px; font-size:16px;}
+    .field{margin-bottom:14px;}
+
+    /* get involved */
+    .involved-grid{grid-template-columns:minmax(0,1fr);}
+    .newsletter{max-width:100%;}
+    .newsletter input{min-width:0; width:100%;}
+    .involved-panel{padding:26px 20px;}
+    .involved-panel h3{font-size:22px; margin-bottom:10px;}
+    .involved-panel p{font-size:14px; margin-bottom:10px;}
+    .involved-list li{padding:10px 0; font-size:13px;}
+
+    /* contact + footer */
+    .contact-section h2{margin-bottom:12px;}
+    .contact-section p.lead{margin-bottom:22px; font-size:14.5px;}
+    .contact-links{gap:18px;}
+    .contact-links .item .value{font-size:17px;}
+    footer{padding:32px 0 22px;}
+    .footer-top{gap:22px; margin-bottom:24px;}
+    .footer-cols{gap:28px;}
+    .footer-col a, .footer-col p{margin-bottom:6px;}
+    .footer-bottom{padding-top:18px;}
+  }
 </style>
 </head>
 <body>
@@ -1215,6 +1325,11 @@
   }
 
   recalcRegistry();
+
+  // On phones, start the registry lists collapsed to keep the page short
+  if (window.matchMedia('(max-width: 900px)').matches) {
+    document.querySelectorAll('.registry-group[open]').forEach(d => d.removeAttribute('open'));
+  }
 </script>
 
 </body>
