@@ -167,6 +167,25 @@
     height:1px; background:var(--line); max-width:var(--maxw); margin:0 auto;
   }
 
+
+  /* ---------- FIELD PHOTOS ---------- */
+  .field-photos{padding:90px 0 100px;}
+  .field-photos .section-head{margin-bottom:44px;}
+  .field-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); grid-auto-rows:270px; gap:12px;
+  }
+  .field-grid figure{position:relative; overflow:hidden; background:var(--charcoal); border:1px solid var(--line); margin:0;}
+  .field-grid figure.lead{grid-row:span 2;}
+  .field-grid img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .9s ease;}
+  .field-grid figure:hover img{transform:scale(1.03);}
+  .field-grid figure.lead img{object-position:50% 38%;}
+  .field-grid figcaption{
+    position:absolute; left:0; right:0; bottom:0; padding:42px 18px 15px;
+    background:linear-gradient(to top, rgba(11,12,10,0.88), rgba(11,12,10,0));
+    font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ivory); line-height:1.5;
+  }
+  .field-grid figcaption b{display:block; color:var(--gold-light); font-weight:500; margin-bottom:2px;}
+
   /* ---------- MISSION / PILLARS ---------- */
   .mission-grid{display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;}
   .mission-grid p{font-size:16px; margin-bottom:18px;}
@@ -381,9 +400,17 @@
     .involved-grid{grid-template-columns:1fr;}
     .donate-wrap{grid-template-columns:1fr; gap:44px;}
     .hero-stats{grid-template-columns:1fr;}
+    .field-photos{padding:64px 0 70px;}
+    .field-grid{grid-template-columns:1fr 1fr; grid-auto-rows:190px;}
+    .field-grid figure.lead{grid-column:span 2; grid-row:span 1; height:420px;}
     .footer-cols{gap:40px;}
     .amounts{grid-template-columns:repeat(4,1fr);}
     section{padding:80px 0;}
+  }
+  @media (max-width:560px){
+    .field-grid{grid-template-columns:1fr; grid-auto-rows:auto;}
+    .field-grid figure{aspect-ratio:3/2;}
+    .field-grid figure.lead{grid-column:auto; grid-row:auto; height:auto; aspect-ratio:4/5;}
   }
 </style>
 </head>
@@ -424,6 +451,39 @@
       <div><div class="num">3</div><div class="label">Countries in the Field</div></div>
       <div><div class="num">11+</div><div class="label">Vetted Partner Organizations</div></div>
       <div><div class="num">100%</div><div class="label">Of Designated Gifts Reach the Field</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="field-photos" id="field">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">In the Field</span>
+      <h2>Seen on the <em>ground</em></h2>
+    </div>
+    <div class="field-grid reveal">
+      <figure class="lead">
+        <img src="assets/photos/field-1.jpg" width="1200" height="1600" alt="Children and community members gather around a large delivery of maize flour and food sacks outside a brick school building, holding a pink sign that reads Donated by Saint Barth Gorilla Alliance">
+        <figcaption><b>Uganda</b>A food delivery reaches a school community</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/photos/field-2.jpg" width="1600" height="1065" loading="lazy" alt="The Saint Barth team standing with Gorilla Doctors staff in front of the Gorilla Doctors Kisoro Field Station sign, in black and white">
+        <figcaption><b>Uganda</b>With the Gorilla Doctors team, Kisoro</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/photos/field-3.jpg" width="1600" height="1065" loading="lazy" alt="Guests wearing Saint Barth Gorilla Expeditions jackets listen to a conservation team member speaking outdoors">
+        <figcaption><b>In conversation</b>Learning from a conservation field team</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/photos/field-4.jpg" width="1280" height="960" loading="lazy" alt="Pupils in green uniforms sit at red wooden desks writing in a brick classroom">
+        <figcaption><b>Uganda</b>In class at a partner school</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/photos/field-5.jpg" width="1600" height="1064" loading="lazy" alt="A visitor holds the hand of a small child while walking with Maasai community members in Tanzania">
+        <figcaption><b>Tanzania</b>Visiting a Maasai community</figcaption>
+      </figure>
     </div>
   </div>
 </section>
