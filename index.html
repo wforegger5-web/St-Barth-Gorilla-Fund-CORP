@@ -357,6 +357,9 @@
   .other-ways h4{font-size:15px; letter-spacing:0.08em; color:var(--gold-light); margin-bottom:12px; font-family:var(--sans); font-weight:500; text-transform:uppercase; font-size:11px; letter-spacing:0.18em;}
   .other-ways p{font-size:13.5px;}
 
+  .alt-donate{margin-top:26px; padding-top:22px; border-top:1px solid var(--line); text-align:center;}
+  #donate-button-container{display:flex; justify-content:center;}
+
   /* ---------- CONTACT / FOOTER ---------- */
   .contact-section{text-align:center;}
   .contact-section h2{margin-bottom:20px;}
@@ -963,21 +966,28 @@
           </select>
         </div>
 
-        <div id="donate-button-container">
-<div id="donate-button"></div>
-<script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-<script>
-PayPal.Donation.Button({
-env:'production',
-hosted_button_id:'X2PBPS47SL9G4',
-image: {
-src:'https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif',
-alt:'Donate with PayPal button',
-title:'PayPal - The safer, easier way to pay online!',
-}
-}).render('#donate-button');
-</script>
-</div>
+        <div id="paypal-button-donate"></div>
+
+        <div class="alt-donate" id="altDonate">
+          <p class="donate-note" style="margin:0 0 12px;">Prefer to choose your amount on PayPal's own page?</p>
+          <div id="donate-button-container">
+            <div id="donate-button"></div>
+            <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+            <script>
+              if (window.PayPal && PayPal.Donation) {
+                PayPal.Donation.Button({
+                  env: 'production',
+                  hosted_button_id: 'X2PBPS47SL9G4',
+                  image: {
+                    src: 'https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif',
+                    alt: 'Donate with PayPal button',
+                    title: 'PayPal - The safer, easier way to pay online!'
+                  }
+                }).render('#donate-button');
+              }
+            </script>
+          </div>
+        </div>
         <p class="donate-note" id="monthlyNote" style="display:none;">Monthly giving is set up individually right now — email <a href="mailto:fund@stbarthgorillafund.org" style="color:var(--gold-light);">fund@stbarthgorillafund.org</a> with your preferred amount and we'll set up recurring billing for you.</p>
         <p class="donate-note">Secured by PayPal — pay by PayPal balance, card, or Venmo. Saint Barth Gorilla Fund is a nonprofit branch of the Saint Barth Gorilla Alliance.</p>
       </div>
@@ -1108,7 +1118,9 @@ title:'PayPal - The safer, easier way to pay online!',
     toggleRow.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.freq === freq));
     const isMonthly = freq === 'monthly';
     monthlyNote.style.display = isMonthly ? 'block' : 'none';
-    donateButtonContainer.style.display = isMonthly ? 'none' : 'block';
+    if (donateButtonContainer) donateButtonContainer.style.display = isMonthly ? 'none' : 'block';
+    const altDonate = document.getElementById('altDonate');
+    if (altDonate) altDonate.style.display = isMonthly ? 'none' : 'block';
   }
 
   toggleRow.addEventListener('click', (e) => {
@@ -1192,7 +1204,7 @@ title:'PayPal - The safer, easier way to pay online!',
     }).render('#paypal-button-registry');
 
   } else {
-    donateButtonContainer.innerHTML = '<p class="donate-note">Payment button failed to load — check your connection or ad blocker, then refresh.</p>';
+    if (donateButtonContainer) donateButtonContainer.innerHTML = '<p class="donate-note">Payment button failed to load — check your connection or ad blocker, then refresh.</p>';
   }
 
   setFrequency('one-time');
