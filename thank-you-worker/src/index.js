@@ -23,6 +23,7 @@
  */
 
 const DEFAULT_API = 'https://api-m.paypal.com';
+const N = "Designated gifts are honored where possible, but the board retains final authority to use all contributions for the Fund's charitable purposes.";
 
 export default {
   async fetch(request, env) {
@@ -180,7 +181,7 @@ function buildEmail(donor) {
   const text = [
     greeting,
     '',
-    `Thank you for ${gift} to the Saint Barth Gorilla Fund. It will go to the schools and conservation partners we work with in Uganda, Tanzania, and Rwanda, and it is felt on the ground.`,
+    `Thank you for ${gift} to the Saint Barth Gorilla Fund. It will go to the schools and conservation organizations the Fund supports in Uganda, Tanzania, and Rwanda, and it is felt on the ground.`,
     chose,
     '',
     'PayPal has also emailed you a payment receipt. That receipt is your record of this transaction.',
@@ -189,7 +190,8 @@ function buildEmail(donor) {
     '',
     'With gratitude,',
     'The Saint Barth Gorilla Fund',
-    'A nonprofit branch of the Saint Barth Gorilla Alliance',
+    'A Massachusetts nonprofit corporation',
+    N,
     'https://stbarthgorillafund.org',
   ]
     .filter((line, i, arr) => !(line === '' && arr[i - 1] === ''))
@@ -199,13 +201,14 @@ function buildEmail(donor) {
 <div style="max-width:560px;margin:0 auto;padding:36px 28px;font-family:Georgia,'Times New Roman',serif;color:#1b1a16;line-height:1.6;font-size:16px;">
   <p style="letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:#8a6a2c;margin:0 0 22px;">Saint Barth Gorilla Fund</p>
   <p>${esc(greeting)}</p>
-  <p>Thank you for ${esc(gift)} to the Saint Barth Gorilla Fund. It will go to the schools and conservation partners we work with in Uganda, Tanzania, and Rwanda, and it is felt on the ground.</p>
+  <p>Thank you for ${esc(gift)} to the Saint Barth Gorilla Fund. It will go to the schools and conservation organizations the Fund supports in Uganda, Tanzania, and Rwanda, and it is felt on the ground.</p>
   ${chose ? `<p>${esc(chose)}</p>` : ''}
   <p>PayPal has also emailed you a payment receipt. That receipt is your record of this transaction.</p>
   <p>If you have any questions, just reply to this email.</p>
   <p style="margin-top:28px;">With gratitude,<br>The Saint Barth Gorilla Fund</p>
   <p style="font-size:13px;color:#6b665a;margin-top:28px;border-top:1px solid #d9d0b8;padding-top:14px;">
-    A nonprofit branch of the Saint Barth Gorilla Alliance<br>
+    A Massachusetts nonprofit corporation<br>
+    ${esc(N)}<br>
     <a href="https://stbarthgorillafund.org" style="color:#8a6a2c;">stbarthgorillafund.org</a>
   </p>
 </div></body></html>`;
