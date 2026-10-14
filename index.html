@@ -369,6 +369,35 @@
   .alt-donate{margin-top:26px; padding-top:22px; border-top:1px solid var(--line); text-align:center;}
   #donate-button-container{display:flex; justify-content:center;}
 
+  /* ---------- THANK-YOU POPUP ---------- */
+  .ty-overlay{
+    position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center;
+    padding:20px; background:rgba(8,9,7,0.82); -webkit-backdrop-filter:blur(3px); backdrop-filter:blur(3px);
+  }
+  .ty-overlay.open{display:flex; animation:tyFade .35s ease both;}
+  .ty-box{
+    position:relative; width:100%; max-width:460px; max-height:calc(100vh - 40px); overflow:auto;
+    background:var(--black); border:1px solid var(--gold); padding:44px 36px 34px; text-align:center;
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);
+  }
+  .ty-mark{height:54px; width:auto; margin:0 auto 20px; opacity:.95;}
+  .ty-eyebrow{font-size:10.5px; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); margin-bottom:12px;}
+  .ty-title{font-family:var(--serif); font-size:34px; line-height:1.15; color:var(--ivory); margin:0 0 14px; font-weight:400;}
+  .ty-title em{color:var(--gold-light);}
+  .ty-text{font-size:15px; line-height:1.6; color:var(--ivory-dim); margin:0 0 12px;}
+  .ty-amount{font-family:var(--serif); font-size:28px; color:var(--gold-light); margin:6px 0 14px;}
+  .ty-small{font-size:12px; line-height:1.55; color:var(--ivory-dim); opacity:.85; margin:18px 0 0; padding-top:16px; border-top:1px solid var(--line);}
+  .ty-close{margin-top:22px; cursor:pointer;}
+  .ty-x{
+    position:absolute; top:10px; right:12px; width:36px; height:36px; background:none; border:none;
+    color:var(--ivory-dim); font-size:26px; line-height:1; cursor:pointer;
+  }
+  .ty-x:hover{color:var(--ivory);}
+  .ty-box:focus{outline:none;}
+  @keyframes tyFade{from{opacity:0;} to{opacity:1;}}
+  @media (prefers-reduced-motion:reduce){.ty-overlay.open{animation:none;}}
+  @media (max-width:560px){ .ty-box{padding:38px 22px 26px;} .ty-title{font-size:28px;} }
+
   /* ---------- CONTACT / FOOTER ---------- */
   .contact-section{text-align:center;}
   .contact-section h2{margin-bottom:20px;}
@@ -1183,9 +1212,47 @@
     setFrequency(btn.dataset.freq);
   });
 
+  // ---- Thank-you popup ----
+  let tyReturnFocus = null;
+  function openThankYou(name, amount){
+    bindThankYou();
+    const ov = document.getElementById('tyOverlay');
+    if (!ov) return;
+    document.getElementById('tyName').textContent = name ? ', ' + name : '';
+    document.getElementById('tyAmount').textContent = Number.isFinite(amount)
+      ? '$' + amount.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2}) : '';
+    tyReturnFocus = document.activeElement;
+    ov.classList.add('open');
+    ov.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const box = ov.querySelector('.ty-box');
+    if (box) box.focus();
+  }
+  function closeThankYou(){
+    const ov = document.getElementById('tyOverlay');
+    if (!ov || !ov.classList.contains('open')) return;
+    ov.classList.remove('open');
+    ov.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (tyReturnFocus && tyReturnFocus.focus) { try { tyReturnFocus.focus(); } catch (e) {} }
+  }
+  let tyBound = false;
+  function bindThankYou(){
+    const ov = document.getElementById('tyOverlay');
+    if (tyBound || !ov) return;
+    tyBound = true;
+    ov.addEventListener('click', e => { if (e.target === ov) closeThankYou(); });
+    document.getElementById('tyClose').addEventListener('click', closeThankYou);
+    document.getElementById('tyX').addEventListener('click', closeThankYou);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeThankYou(); });
+  }
+  document.addEventListener('DOMContentLoaded', bindThankYou);
+  if (document.readyState !== 'loading') bindThankYou();
+
   function showThankYou(container, details, amount){
     const name = details && details.payer && details.payer.name ? details.payer.name.given_name : '';
     container.innerHTML = `<p style="font-family:var(--serif); font-size:19px; color:var(--gold-light);">Thank you${name ? ', ' + name : ''} — your gift of $${amount.toFixed(2)} was received.</p>`;
+    openThankYou(name, amount);
   }
 
   // Guard in case the SDK fails to load (ad blockers, offline preview, etc.)
@@ -1332,5 +1399,18 @@
   }
 </script>
 
+<div class="ty-overlay" id="tyOverlay" aria-hidden="true">
+  <div class="ty-box" role="dialog" aria-modal="true" aria-labelledby="tyTitle" tabindex="-1">
+    <button type="button" class="ty-x" id="tyX" aria-label="Close">&times;</button>
+    <img class="ty-mark" src="assets/logos/logo_gorilla_ivory.png" alt="" width="80" height="54">
+    <div class="ty-eyebrow">Gift received</div>
+    <h2 class="ty-title" id="tyTitle">Thank you<span id="tyName"></span></h2>
+    <div class="ty-amount" id="tyAmount"></div>
+    <p class="ty-text">Your gift to the Saint Barth Gorilla Fund will support schools and conservation partners in Uganda, Tanzania, and Rwanda.</p>
+    <p class="ty-text">PayPal is emailing you a receipt for your records.</p>
+    <p class="ty-small">Designated gifts are honored where possible, but the board retains final authority to use all contributions for the Fund's charitable purposes.</p>
+    <button type="button" class="btn solid ty-close" id="tyClose">Close</button>
+  </div>
+</div>
 </body>
 </html>
