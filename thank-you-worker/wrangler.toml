@@ -1,0 +1,21 @@
+# Only needed if you deploy with the command line (npx wrangler deploy).
+# If you paste src/index.js into the Cloudflare dashboard, ignore this file.
+name = "gorilla-fund-thank-you"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+FROM_EMAIL = "info@stbarthgorillaexpeditions.com"
+FROM_NAME = "Saint Barth Gorilla Fund"
+# REPLY_TO = "fund@stbarthgorillafund.org"
+
+# Secrets are NOT stored here. Set them with:
+#   npx wrangler secret put PAYPAL_CLIENT_SECRET
+#   npx wrangler secret put RESEND_API_KEY
+# Also set PAYPAL_CLIENT_ID and PAYPAL_WEBHOOK_ID (see README.md).
+
+# Optional: stop duplicate emails if PayPal re-sends an event.
+# Create with: npx wrangler kv namespace create SEEN   then paste the id:
+# [[kv_namespaces]]
+# binding = "SEEN"
+# id = "PASTE_ID_HERE"
