@@ -132,8 +132,7 @@ and the warning disappears.
   converted from EUR at roughly €1 = $1.15. Both drift with the exchange
   rate — update the `data-amt` values and visible `$` labels in the Registry
   section whenever you want to refresh them.
-- **Contact details:** currently show Wellesley, MA and a placeholder
-  `fund@stbarthgorillafund.org` — update to your real inbox.
+- **Contact details:** Wellesley, MA and `info@stbarthgorillafund.org`.
 - **Newsletter signup:** currently just shows a confirmation alert. Wire it
   to a real list (Mailchimp, Formspree, etc.) by replacing the
   `newsletterBtn` click handler with a POST to your provider's API/form
